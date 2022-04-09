@@ -1,0 +1,36 @@
+.landing {
+  background-image: url(../imgs/cover.98ab1b0a.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+  height: 100vh;
+  position: relative;
+}
+
+.wave-9-bottom-0 {
+  fill: #ffffff;
+}
+.wave-9-bottom-1 {
+  fill: #ffffff;
+}
+
+.svg {
+  position: absolute;
+  bottom: 0;
+}
+
+.pic-bottom {
+  padding-top: 20px;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.pic-bottom li {
+  background-color: #fff4e0;
+  border-radius: 50%;
+  padding: 20px;
+}
