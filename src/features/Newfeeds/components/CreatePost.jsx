@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import PopupCreatePost from './PopupCreatePost';
-import avt from '../../../assets/imgs/non-avatar.png';
 
 function CreatePost({ getPostList }) {
   const currentUser = useSelector((state) => state.user.current);
@@ -18,9 +17,10 @@ function CreatePost({ getPostList }) {
   return (
     <div className="box create-post">
       <img
-        src={currentUser?.avatar ? currentUser.avatar : avt}
+        src={currentUser?.avatar}
         alt=""
         width={40}
+        height={40}
         className="avatar"
       />
       <div className="input-wrapper">

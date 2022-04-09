@@ -1,12 +1,12 @@
 import PostItem from './PostItem';
 
-function PostList({ postList }) {
+function PostList({ postList, getPostList }) {
   return (
     <div>
       <ul>
         {postList.map((post, index) => (
           <li key={index}>
-            <PostItem post={post} />
+            <PostItem post={post} getPostList={getPostList} />
           </li>
         ))}
       </ul>

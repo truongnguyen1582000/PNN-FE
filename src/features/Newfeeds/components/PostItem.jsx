@@ -1,17 +1,32 @@
 import React from 'react';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import avt from '../../../assets/imgs/non-avatar.png';
+import { useSnackbar } from 'notistack';
+import { postApi } from '../../../api/post';
+import PostComment from './PostComment';
+import PostCommentor from './PostCommentor';
 
-function PostItem({ post }) {
+function PostItem({ post, getPostList }) {
   const currentUser = useSelector((state) => state.user.current);
+  const isLikedPost = post?.likes?.some((e) => e === currentUser._id);
+  const { enqueueSnackbar } = useSnackbar();
+  const handleLikePost = async () => {
+    console.log('first');
+    try {
+      await postApi.likePost(post._id);
+      getPostList();
+    } catch (error) {
+      enqueueSnackbar(error, { variant: 'error' });
+    }
+  };
+
   return (
     <div className="post-item box">
       <div className="create-post__center">
         <div className="author post-author">
-          <img src={post.author?.avatar ? post.author.avatar : avt} alt="" />
+          <img src={post.author?.avatar} alt="" height={40} width={40} />
           <div className="name-and-time">
-            <p className="name">{currentUser.username}</p>
+            <p className="name">{post.author?.username}</p>
             <span>{moment(post.createdAt).fromNow()}</span>
           </div>
         </div>
@@ -20,9 +35,13 @@ function PostItem({ post }) {
         <p>{post.content}</p>
         <img src={post.imgUrl} alt="" />
       </div>
-      <div className="post-action ">
-        <div className="like">
-          <i className="fa-light fa-heart"></i>
+      <div className="post-action">
+        <div className="like" onClick={handleLikePost}>
+          {isLikedPost ? (
+            <i className="fa-solid fa-heart liked"></i>
+          ) : (
+            <i className="fa-light fa-heart"></i>
+          )}
           <span>Like</span>
         </div>
         <div className="bookmark-save">
@@ -34,7 +53,8 @@ function PostItem({ post }) {
           <span>Share</span>
         </div>
       </div>
-      <div className="post-comment"></div>
+      <PostComment post={post} />
+      <PostCommentor post={post} getPostList={getPostList} />
     </div>
   );
 }

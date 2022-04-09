@@ -10,6 +10,7 @@ function Newfeed(props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const getPostList = async () => {
+    console.log('x');
     try {
       const { data } = await postApi.getAllPost();
       console.log(data);
@@ -30,7 +31,7 @@ function Newfeed(props) {
   return (
     <div>
       <CreatePost getPostList={getPostList} />
-      <PostList postList={postList} />
+      <PostList postList={postList} getPostList={getPostList} />
     </div>
   );
 }

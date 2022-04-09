@@ -10,7 +10,20 @@ const getAllPost = () => {
   return axiosClient.get(url);
 };
 
+const likePost = (postId) => {
+  const url = '/posts/like/' + postId;
+  return axiosClient.put(url);
+};
+
+const commentPost = (postId, data) => {
+  console.log(postId);
+  const url = '/posts/' + postId + '/comment';
+  return axiosClient.post(url, data);
+};
+
 export const postApi = {
   createPost,
   getAllPost,
+  likePost,
+  commentPost,
 };

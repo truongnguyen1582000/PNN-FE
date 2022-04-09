@@ -4,7 +4,6 @@ import { uploadAvatar } from '../../../api/cloudinary';
 import { postApi } from '../../../api/post';
 import { useSnackbar } from 'notistack';
 import { useSelector } from 'react-redux';
-import avt from '../../../assets/imgs/non-avatar.png';
 
 function PopupCreatePost({ open, handleClose, getPostList }) {
   const [image, setImage] = useState();
@@ -31,20 +30,22 @@ function PopupCreatePost({ open, handleClose, getPostList }) {
 
     try {
       if (image) {
+        setPostContent('');
         const { data } = await uploadAvatar(image);
         await postApi.createPost({
           content: postContent,
           imgUrl: data.url,
         });
       } else {
+        setPostContent('');
         await postApi.createPost({
           content: postContent,
         });
       }
 
+      handleClose();
       enqueueSnackbar('Create post successfully', { variant: 'success' });
       getPostList();
-      handleClose();
     } catch (error) {
       enqueueSnackbar(error, { variant: 'error' });
     }
@@ -63,7 +64,7 @@ function PopupCreatePost({ open, handleClose, getPostList }) {
         </div>
         <div className="create-post__center">
           <div className="author">
-            <img src={currentUser?.avatar ? currentUser.avatar : avt} alt="" />
+            <img src={currentUser?.avatar} alt="" height={56} width={56} />
             <p className="name-author-create">{currentUser.username}</p>
           </div>
         </div>
