@@ -8,10 +8,8 @@ import pic4 from '../../assets/imgs/pic4.webp';
 import pic5 from '../../assets/imgs/pic5.png';
 import pic6 from '../../assets/imgs/pic6.webp';
 import Login from '../Auth/Pages/Login/inedx';
-import { useLocation } from 'react-router-dom';
 
 function Landing(props) {
-  const currentPage = useLocation();
   return (
     <div className="landing">
       <img src={logo} alt="" width={200} className="landing-nav" />

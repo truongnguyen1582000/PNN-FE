@@ -11,11 +11,15 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    if (currentUser._id) {
-      navigate('/home-page/newfeed');
-    }
-  }, [location.pathname === '/']);
+  useEffect(
+    () => {
+      if (currentUser._id) {
+        navigate('/home-page/newfeed');
+      }
+    },
+    // eslint-disable-next-line
+    [location.pathname === '/']
+  );
   return (
     <div className="App">
       <Routes>

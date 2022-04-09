@@ -19,9 +19,14 @@ function Newfeed(props) {
     }
   };
 
-  useEffect(() => {
-    getPostList();
-  }, []);
+  useEffect(
+    () => {
+      getPostList();
+    },
+    // eslint-disable-next-line
+    []
+  );
+
   return (
     <div>
       <CreatePost getPostList={getPostList} />
