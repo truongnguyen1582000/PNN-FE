@@ -33,11 +33,11 @@ function Sidebar(props) {
       </li>
       <li>
         <NavLink
-          to="/home-page/videos"
+          to="/home-page/shop"
           className={({ isActive }) => (isActive ? 'activeNav' : '')}
         >
-          <i className="fa-solid fa-video"></i>
-          <span>Videos</span>
+          <i className="fa-solid fa-cart-minus"></i>
+          <span>Shop</span>
         </NavLink>
       </li>
       <li>
@@ -65,6 +65,15 @@ function Sidebar(props) {
         >
           <i className="fa-solid fa-book"></i>
           <span>Knowledge</span>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? 'activeNav' : '')}
+        >
+          <i className="fa-solid fa-dog"></i>
+          <span>Pet Information</span>
         </NavLink>
       </li>
       <li>

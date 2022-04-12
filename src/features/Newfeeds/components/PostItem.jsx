@@ -8,10 +8,9 @@ import PostCommentor from './PostCommentor';
 
 function PostItem({ post, getPostList }) {
   const currentUser = useSelector((state) => state.user.current);
-  const isLikedPost = post?.likes?.some((e) => e === currentUser._id);
+  const isLikedPost = post?.likes?.some((e) => e._id === currentUser._id);
   const { enqueueSnackbar } = useSnackbar();
   const handleLikePost = async () => {
-    console.log('first');
     try {
       await postApi.likePost(post._id);
       getPostList();

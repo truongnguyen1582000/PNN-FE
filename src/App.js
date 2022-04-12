@@ -27,7 +27,6 @@ function App() {
         <Route path="/auth/*" element={<Auth />} />
         <Route path="/home-page/*" element={<HomePage />} />
       </Routes>
-      io
     </div>
   );
 }

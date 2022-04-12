@@ -4,10 +4,19 @@ function PostComment({ post }) {
   return (
     <div>
       {post.comments.length > 0 ? (
-        <div className="box comment-list-box">
+        <div className="comment-list-box">
           {post?.comments?.map((comment, index) => (
-            <div key={index}>
-              <p>{comment.content}</p>
+            <div key={index} className="comment-item">
+              <img
+                src={comment.commentBy?.avatar}
+                width={30}
+                height={30}
+                alt=""
+              />
+              <div className="comment-content">
+                <span>{comment.commentBy?.username}</span>
+                <p>{comment.content}</p>
+              </div>
             </div>
           ))}
         </div>

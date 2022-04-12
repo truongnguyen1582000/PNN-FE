@@ -4,7 +4,17 @@
     url(/public/assets/font/static/Mulish-Light.ttf),
     url(/public/assets/font/static/Mulish-Bold.ttf),
     url(/public/assets/font/static/Mulish-ExtraBold.ttf),
-    url(/public/assets/font/static/Mulish-Regular.ttf);
+    url(/public/assets/font/static/Mulish-ExtraLight.ttf),
+    url(/public/assets/font/static/Mulish-LightItalic.ttf),
+    url(/public/assets/font/static/Mulish-MediumItalic.ttf),
+    url(/public/assets/font/static/Mulish-Regular.ttf),
+    url(/public/assets/font/static/Mulish-SemiBold.ttf),
+    url(/public/assets/font/static/Mulish-SemiBoldItalic.ttf),
+    url(/public/assets/font/static/Mulish-Black.ttf),
+    url(/public/assets/font/static/Mulish-BlackItalic.ttf),
+    url(/public/assets/font/static/Mulish-ExtraBoldItalic.ttf),
+    url(/public/assets/font/static/Mulish-ExtraLightItalic.ttf),
+    url(/public/assets/font/static/Mulish-Italic.ttf);
 }
 
 html,

@@ -290,6 +290,10 @@
   color: #28c76f;
 }
 
+.sidebar li:nth-child(8) a i {
+  color: #2828c7;
+}
+
 .sidebar li a span {
   color: #4d5969;
   font-size: 16px;
@@ -525,11 +529,11 @@
 }
 
 .lable-input i {
-  position: absolute;
   bottom: 24px;
   right: 24px;
   font-size: 24px;
   color: #929597;
+  cursor: pointer;
 }
 
 .post-item {
@@ -648,12 +652,23 @@
 
 .comment-list-box {
   margin-bottom: 0;
+  padding: 0 20px 8px;
+  background-color: #f9fafd;
 }
 
 .comment-input {
   padding: 16px;
-  padding-top: 0;
-  position: relative;
+  padding-top: 8px;
+  display: flex;
+  align-items: center;
+  background-color: #f9fafd;
+}
+
+.comment-input img {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
 }
 
 .comment-input__box {
@@ -665,17 +680,88 @@
   width: 100%;
   border-radius: 4px;
   border: 2px solid #edf2f9;
-  padding: 16px;
-  font-size: 16px;
+  padding: 8px;
+  font-size: 13px;
   resize: none;
 }
 
 .comment-input__button {
-  width: 100%;
   font-size: 14px;
   padding: 8px;
   background-color: #ffc25a;
   text-transform: uppercase;
   color: #5e6e82;
   border-radius: 4px;
+  margin-left: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.comment-item {
+  display: flex;
+  padding-top: 16px;
+}
+
+.comment-item img {
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.comment-content {
+  display: flex;
+  font-size: 13px;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 0px 0.25rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.comment-content span {
+  color: #ffa000;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.disable {
+  cursor: not-allowed;
+  background-color: #f9fafd;
+}
+
+/*  */
+.create-product-form {
+  padding-top: 0;
+  position: relative;
+  padding-top: 8px;
+}
+
+.create-product-form label {
+  font-size: 14px;
+  color: #5e6e82;
+  margin-bottom: 8px;
+}
+
+.create-product-form input {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border: 2px solid #edf2f9;
+  padding: 16px;
+  font-size: 16px;
+  resize: none;
+  background-color: #fff !important;
+}
+
+.image-input {
+  display: none;
+}
+
+.create-product-btn {
+  width: 100%;
+  padding: 16px;
+  margin-top: 16px;
+  background-color: #ffc25a;
+  text-transform: uppercase;
+  color: #5e6e82;
+  border-radius: 4px;
+  cursor: pointer;
 }
