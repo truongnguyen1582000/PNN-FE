@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { uploadAvatar } from '../../../api/cloudinary';
 import { productApi } from '../../../api/product';
+import { useSnackbar } from 'notistack';
 
 function CreateProductForm(props) {
   const [image, setImage] = useState();
@@ -12,6 +13,7 @@ function CreateProductForm(props) {
     description: '',
     quantity: '',
   });
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (image) {
@@ -32,13 +34,15 @@ function CreateProductForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(productInfos);
-    console.log(image);
 
-    if (image) {
+    try {
+      if (!image) {
+        return enqueueSnackbar('Please choose an image', { variant: 'error' });
+      }
       const { data } = await uploadAvatar(image);
+
       await productApi.createProduct({
-        productInfos,
+        ...productInfos,
         image: data.url,
       });
       setProductInfos({
@@ -48,17 +52,11 @@ function CreateProductForm(props) {
         quantity: '',
       });
       setImage(null);
-    } else {
-      await productApi.createProduct({
-        productInfos,
+      enqueueSnackbar('Product created successfully', { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar(error, {
+        variant: 'error',
       });
-      setProductInfos({
-        name: '',
-        price: '',
-        description: '',
-        quantity: '',
-      });
-      setImage(null);
     }
   };
 

@@ -5,6 +5,12 @@ const createProduct = (data) => {
   return axiosClient.post(url, data);
 };
 
+const getProductList = (data) => {
+  const url = '/products';
+  return axiosClient.get(url, data);
+};
+
 export const productApi = {
   createProduct,
+  getProductList,
 };
