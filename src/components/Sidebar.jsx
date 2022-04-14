@@ -1,7 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { cartListCountSelector } from '../utils/selector';
 
 function Sidebar(props) {
+  const cartCounter = useSelector(cartListCountSelector);
+
   return (
     <ul className="sidebar">
       <li>
@@ -36,26 +40,28 @@ function Sidebar(props) {
           to="/home-page/shop"
           className={({ isActive }) => (isActive ? 'activeNav' : '')}
         >
-          <i className="fa-solid fa-cart-minus"></i>
-          <span>Shop</span>
+          <i className="fa-solid fa-store"></i>
+          <span>My Shop</span>
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/home-page/zoo"
+          to="/home-page/shoping"
           className={({ isActive }) => (isActive ? 'activeNav' : '')}
         >
-          <i className="fa-solid fa-paw"></i>
-          <span>Zoo</span>
+          <i className="fa-solid fa-shop"></i>
+          <span>Shoping</span>
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/home-page/clinic"
+          to="/home-page/cart"
           className={({ isActive }) => (isActive ? 'activeNav' : '')}
         >
-          <i className="fa-solid fa-hospital"></i>
-          <span>Clinic</span>
+          <span>{cartCounter}</span>
+          <i className="fa-solid fa-cart-shopping"></i>
+          <span>Cart</span>
+          <div className="cart-counter"></div>
         </NavLink>
       </li>
       <li>

@@ -1,15 +1,11 @@
 import React from 'react';
+import ProductItem from './ProductItem';
 
 function ProductList({ productList }) {
   return (
-    <div>
+    <div className="product-list">
       {productList.map((product) => (
-        <div key={product.id}>
-          <img src={product.image} alt="" />
-          <p>{product.description}</p>
-          <p>{product.name}</p>
-          <p>{product.price}</p>
-        </div>
+        <ProductItem product={product} key={product._id} />
       ))}
     </div>
   );

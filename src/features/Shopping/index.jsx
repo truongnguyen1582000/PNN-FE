@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { productApi } from '../../api/product';
-import CreateProductForm from './components/CreateProductForm';
-import ProductList from './components/ProductList';
+import ProductList from '../Shop/components/ProductList';
 
-function Shop(props) {
+function Shopping(props) {
   const [productList, setProductList] = useState([]);
 
   // get product list func with try catch
@@ -19,14 +18,11 @@ function Shop(props) {
   useEffect(() => {
     getProductList();
   }, []);
-
   return (
-    <div className="box large-size">
-      <CreateProductForm getProductList={getProductList} />
-      <hr />
+    <div className="large-size">
       <ProductList productList={productList} />
     </div>
   );
 }
 
-export default Shop;
+export default Shopping;

@@ -6,11 +6,11 @@ import Sidebar from '../../components/Sidebar';
 import Account from '../Account';
 import Announment from '../Announcement';
 import Bookmark from '../Bookmark';
-import Clinic from '../Clinic';
+import Cart from '../Cart';
 import Knowledge from '../Knowledge';
 import Newfeed from '../Newfeeds';
 import Shop from '../Shop';
-import Zoo from '../Zoo';
+import Shopping from '../Shopping';
 
 function HomePage(props) {
   const [loading, setLoading] = useState(true);
@@ -18,7 +18,7 @@ function HomePage(props) {
     () => {
       setTimeout(() => {
         setLoading(false);
-      }, 1000);
+      }, 1);
     },
     // eslint-disable-next-line
     []
@@ -41,8 +41,8 @@ function HomePage(props) {
                   <Route path="/account" element={<Account />} />
                   <Route path="/announcement" element={<Announment />} />
                   <Route path="/shop" element={<Shop />} />
-                  <Route path="/zoo" element={<Zoo />} />
-                  <Route path="/clinic" element={<Clinic />} />
+                  <Route path="/shoping" element={<Shopping />} />
+                  <Route path="/cart" element={<Cart />} />
                   <Route path="/knowledge" element={<Knowledge />} />
                   <Route path="/bookmark" element={<Bookmark />} />
                 </Routes>

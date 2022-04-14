@@ -3,7 +3,7 @@ import { uploadAvatar } from '../../../api/cloudinary';
 import { productApi } from '../../../api/product';
 import { useSnackbar } from 'notistack';
 
-function CreateProductForm(props) {
+function CreateProductForm({ getProductList }) {
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   const fileInputRef = useRef();
@@ -53,6 +53,7 @@ function CreateProductForm(props) {
       });
       setImage(null);
       enqueueSnackbar('Product created successfully', { variant: 'success' });
+      getProductList();
     } catch (error) {
       enqueueSnackbar(error, {
         variant: 'error',
@@ -67,6 +68,7 @@ function CreateProductForm(props) {
         type="text"
         className="product-name"
         name="name"
+        placeholder="Product Name..."
         id="name"
         value={productInfos.name}
         onChange={handleProductInfoChange}
@@ -79,19 +81,36 @@ function CreateProductForm(props) {
         id="description"
         value={productInfos.description}
         onChange={handleProductInfoChange}
+        placeholder="Product Description..."
       />
-      <label htmlFor="price">Product Price:</label>
+      <label htmlFor="price">Product Price: (VNĐ)</label>
       <input
-        type="text"
+        type="input"
         className="price"
         name="price"
         id="price"
         value={productInfos.price}
         onChange={handleProductInfoChange}
+        placeholder="Product Price..."
       />
       <div>
+        <label
+          htmlFor=""
+          style={{
+            display: 'inline-block',
+            marginBottom: '16px',
+            marginRight: '4px',
+          }}
+        >
+          Product Image:{' '}
+        </label>
         <label htmlFor="image" className="lable-input">
-          <i className="fa-solid fa-image"></i>
+          <i
+            className="fa-solid fa-image"
+            style={{
+              transform: 'translateY(4px)',
+            }}
+          ></i>
         </label>
         <input
           type="file"
@@ -106,7 +125,8 @@ function CreateProductForm(props) {
           <div
             style={{
               textAlign: 'center',
-              margin: '0 16px',
+              // margin: '0 16px',
+              marginBottom: '16px',
               borderRadius: '8px',
               boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
               position: 'relative',
@@ -139,6 +159,7 @@ function CreateProductForm(props) {
         id="quantity"
         value={productInfos.quantity}
         onChange={handleProductInfoChange}
+        placeholder="Product quantity..."
       />
 
       <button type="submit" className="create-product-btn">

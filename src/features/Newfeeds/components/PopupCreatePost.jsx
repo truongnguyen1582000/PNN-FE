@@ -79,7 +79,15 @@ function PopupCreatePost({ open, handleClose, getPostList }) {
               setPostContent(e.target.value);
             }}
           ></textarea>
-          <label htmlFor="file" className="lable-input">
+          <label
+            htmlFor="file"
+            className="lable-input"
+            style={{
+              position: 'absolute',
+              bottom: '24px',
+              right: '24px',
+            }}
+          >
             <i className="fa-solid fa-image"></i>
           </label>
           <input
