@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { cartListCountSelector } from '../utils/selector';
 
 function Sidebar(props) {
-  const cartCounter = useSelector(cartListCountSelector);
+  const cartList = useSelector((state) => state.cart);
+  console.log(cartList.list.length);
 
   return (
     <ul className="sidebar">
@@ -58,10 +58,11 @@ function Sidebar(props) {
           to="/home-page/cart"
           className={({ isActive }) => (isActive ? 'activeNav' : '')}
         >
-          <span>{cartCounter}</span>
           <i className="fa-solid fa-cart-shopping"></i>
           <span>Cart</span>
-          <div className="cart-counter"></div>
+          <div className="cart-counter">
+            <span className="counter">{cartList.list.length}</span>
+          </div>
         </NavLink>
       </li>
       <li>

@@ -7,7 +7,7 @@ function ProductItem({ product }) {
   const isMyProduct = currentUser._id === product.shopOwner._id;
   const dispatch = useDispatch();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     dispatch(addTocart(product));
   };
 
@@ -25,13 +25,11 @@ function ProductItem({ product }) {
           </p>
         </div>
 
-        <div className="add-to-cart">
-          {!isMyProduct && (
-            <button className="btn btn-primary" onClick={handleAddToCart}>
-              Add to cart
-            </button>
-          )}
-        </div>
+        {!isMyProduct && (
+          <div className="add-to-cart" onClick={handleAddToCart}>
+            <button className="btn btn-primary">Add to cart</button>
+          </div>
+        )}
       </div>
     </div>
   );

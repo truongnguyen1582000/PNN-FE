@@ -164,3 +164,17 @@ textarea {
 input::placeholder {
   font-size: 13px;
 }
+
+button,
+input {
+  cursor: pointer;
+}
+
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.02);
+  color: #fff;
+}

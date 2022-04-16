@@ -10,7 +10,13 @@ const getProductList = (data) => {
   return axiosClient.get(url, data);
 };
 
+const getMyProduct = () => {
+  const url = `/products/myProducts`;
+  return axiosClient.get(url);
+};
+
 export const productApi = {
   createProduct,
   getProductList,
+  getMyProduct,
 };

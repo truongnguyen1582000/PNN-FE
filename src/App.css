@@ -252,6 +252,23 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+  position: relative;
+}
+
+.sidebar li .cart-counter {
+  position: absolute;
+  top: -4px;
+  left: 30px;
+  padding: 2px 4px;
+  border-radius: 50%;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar li .counter {
+  color: #fff;
+  font-size: 12px;
 }
 
 .sidebar li a i {
@@ -521,7 +538,12 @@
 }
 
 .not-allowed {
-  cursor: not-allowed;
+  cursor: not-allowed !important;
+}
+
+.not-allowed:hover {
+  transform: unset;
+  color: inherit;
 }
 
 .btn-wrapper {
@@ -838,4 +860,109 @@
 .btn-primary {
   background-color: #ffc25a;
   color: #5e6e82;
+}
+
+.cart-list {
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0px 0.25rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.cart-item {
+  height: 130px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px;
+  border-radius: 8px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.cart-item:not(:last-child) {
+  border-bottom: 1px solid #ffb013;
+  padding-bottom: 20px;
+  margin-bottom: 16px;
+}
+
+.cart-item-img {
+  display: flex;
+  align-items: center;
+}
+
+.cart-item-img img {
+  margin-right: 16px;
+  height: 122px;
+  width: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 0px 0.25rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.quantity {
+  margin-right: 8px;
+  height: 34px;
+}
+
+.quantity button {
+  width: 50px;
+}
+
+.quantity input {
+  width: 50px;
+  height: 100%;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.cart-item-price {
+  color: #ffb013;
+  margin-top: 16px;
+  font-weight: bold;
+}
+
+.checkout-btn {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.invite-friend {
+  background-color: rgb(21, 138, 222);
+  border-radius: 16px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.cart {
+  display: flex;
+  flex-direction: column;
+}
+
+.invite-friend {
+  width: 160px;
+  margin-left: auto;
+}
+
+.invite-friend i {
+  margin-right: 8px;
+}
+
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 24px;
+}
+
+.cart-empty i {
+  margin-bottom: 16px;
 }

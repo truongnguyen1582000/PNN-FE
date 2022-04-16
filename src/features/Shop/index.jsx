@@ -9,7 +9,7 @@ function Shop(props) {
   // get product list func with try catch
   const getProductList = async () => {
     try {
-      const { data } = await productApi.getProductList();
+      const { data } = await productApi.getMyProduct();
       setProductList(data);
     } catch (error) {
       console.log(error);
