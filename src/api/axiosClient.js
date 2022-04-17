@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { STATIC_HOST } from '../constant';
 
+const navigate = (path) => {
+  window.location.href = path;
+};
+
 const axiosClient = axios.create({
   baseURL: STATIC_HOST,
   headers: {
@@ -33,6 +37,10 @@ axiosClient.interceptors.response.use(
     return response.data;
   },
   function (error) {
+    if (error.response.status === 401) {
+      return navigate('/');
+    }
+
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(error.response.data.message);

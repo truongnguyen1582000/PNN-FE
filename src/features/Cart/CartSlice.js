@@ -44,6 +44,13 @@ const cartSlice = createSlice({
       }
       localStorage.setItem('cart', JSON.stringify(state.list));
     },
+    setQuanity: (state, { payload }) => {
+      const index = state.list.findIndex(
+        (item) => item._id === payload.item._id
+      );
+      state.list[index].count = payload.quantity;
+      localStorage.setItem('cart', JSON.stringify(state.list));
+    },
   },
 });
 
@@ -56,5 +63,6 @@ export const {
   saveCart,
   addMore,
   descreaseItem,
+  setQuanity,
 } = actions;
 export default reducer;

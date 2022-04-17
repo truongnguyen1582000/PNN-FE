@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CartList from './components/CartList';
 import { cartTotalSelector } from '../../utils/selector';
 import { useSelector } from 'react-redux';
+import PopupInvite from './components/PopupInvite';
 
 function Cart(props) {
   const total = useSelector(cartTotalSelector);
-  console.log(total);
+  const [showPopupInvite, setShowPopupInvite] = useState(false);
   return (
     <div className="large-size cart">
-      <button className="invite-friend">
+      <button
+        className="invite-friend"
+        onClick={() => setShowPopupInvite(true)}
+      >
         <i className="fa-solid fa-user-friends"></i>
         <span>Invite a friend</span>
       </button>
+      <PopupInvite
+        showPopupInvite={showPopupInvite}
+        setShowPopupInvite={setShowPopupInvite}
+      />
       <CartList />
       <button
         className={
