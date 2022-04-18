@@ -350,6 +350,7 @@
 
 .main {
   position: relative;
+  margin-bottom: 32px;
   left: 233px;
   /* background-color: #fff;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); */
@@ -1047,6 +1048,41 @@
 }
 
 .start-order {
+  width: 100%;
+  border-radius: 30px;
+  padding: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+  color: #000;
+  background-color: rgb(21, 138, 222);
+}
+
+.cart-action {
+  display: flex;
+}
+.delete-cart-item {
+  margin-left: 16px;
+}
+
+.delete-cart-item .btn {
+  background-color: transparent;
+}
+
+.delete-cart-item i {
+  color: red;
+  font-size: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.delete-cart-item .btn:hover i {
+  transform: scale(1.2);
+}
+
+.token {
+  margin-top: 24px;
+}
+
+.copy-btn {
   width: 100%;
   border-radius: 30px;
   padding: 8px;

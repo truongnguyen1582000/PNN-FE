@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../assets/styles/Landing.css';
 import logo from '../../assets/imgs/logo.png';
 import pic1 from '../../assets/imgs/pic1.webp';
@@ -8,8 +8,18 @@ import pic4 from '../../assets/imgs/pic4.webp';
 import pic5 from '../../assets/imgs/pic5.png';
 import pic6 from '../../assets/imgs/pic6.webp';
 import Login from '../Auth/Pages/Login/inedx';
+import { clearCart } from '../Cart/CartSlice';
+import { useDispatch } from 'react-redux';
 
 function Landing(props) {
+  const dispatch = useDispatch();
+  useEffect(
+    () => {
+      dispatch(clearCart());
+    },
+    // eslint-disable-next-line
+    []
+  );
   return (
     <div className="landing">
       <img src={logo} alt="" width={200} className="landing-nav" />

@@ -11,7 +11,6 @@ const userSlice = createSlice({
       state.current = {};
       localStorage.removeItem('USER');
       localStorage.removeItem('TOKEN');
-      localStorage.removeItem('cart');
     },
     login: (state, { payload }) => {
       state.current = payload.userInfo;

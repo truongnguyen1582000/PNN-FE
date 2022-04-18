@@ -10,12 +10,17 @@ function Sidebar(props) {
 
   const getCart = async () => {
     const response = await cartApi.getCart();
+    localStorage.setItem('cartId', response?.data?._id);
     dispatch(setCart(response?.data?.cartItems));
   };
 
-  useEffect(() => {
-    getCart();
-  }, []);
+  useEffect(
+    () => {
+      getCart();
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <ul className="sidebar">

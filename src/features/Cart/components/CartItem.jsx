@@ -4,7 +4,6 @@ import { cartApi } from '../../../api/cart';
 import { setCart } from '../../Cart/CartSlice';
 
 function CartItem({ item }) {
-  console.log(item);
   const dispatch = useDispatch();
 
   const getCart = async () => {
@@ -23,15 +22,28 @@ function CartItem({ item }) {
   const handleDecrease = async () => {
     await cartApi.addToCart({
       productId: item.product._id,
+      number: -1,
     });
 
     await getCart();
   };
 
-  // const handleChange = (e) => {
-  //   setQuantity(e.target.value);
-  //   dispatch(setQuanity({ item, quantity: e.target.value }));
-  // };
+  const handleDeleteCartItem = async () => {
+    await cartApi.deleteCartItem({
+      productId: item.product._id,
+    });
+
+    await getCart();
+  };
+
+  const handleChange = async (e) => {
+    await cartApi.addToCart({
+      productId: item.product._id,
+      number: e.target.value,
+    });
+
+    await getCart();
+  };
 
   return (
     <div className="cart-item">
@@ -47,14 +59,21 @@ function CartItem({ item }) {
           </p>
         </div>
       </div>
-      <div className="quantity">
-        <button className="btn btn-primary" onClick={handleDecrease}>
-          -
-        </button>
-        <input type="text" value={item.quantity} />
-        <button className="btn btn-primary" onClick={handleIncrease}>
-          +
-        </button>
+      <div className="cart-action">
+        <div className="quantity">
+          <button className="btn btn-primary" onClick={handleDecrease}>
+            -
+          </button>
+          <input type="text" value={item.quantity} onChange={handleChange} />
+          <button className="btn btn-primary" onClick={handleIncrease}>
+            +
+          </button>
+        </div>
+        <div className="delete-cart-item">
+          <button className="btn btn-danger" onClick={handleDeleteCartItem}>
+            <i className="fas fa-trash-alt"></i>
+          </button>
+        </div>
       </div>
     </div>
   );

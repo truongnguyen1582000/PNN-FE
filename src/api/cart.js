@@ -1,6 +1,6 @@
 import axiosClient from './axiosClient';
 
-const setLimiMoney = (data) => {
+const setLimitMoney = (data) => {
   const url = '/cart/setLimitMoney';
   return axiosClient.post(url, data);
 };
@@ -15,8 +15,20 @@ const getCart = (data) => {
   return axiosClient.get(url, data);
 };
 
+const deleteCartItem = (data) => {
+  const url = `/cart/${data.productId}`;
+  return axiosClient.delete(url);
+};
+
+const getShareToken = () => {
+  const url = '/cart/shareToken';
+  return axiosClient.get(url);
+};
+
 export const cartApi = {
-  setLimiMoney,
+  setLimitMoney,
   addToCart,
   getCart,
+  deleteCartItem,
+  getShareToken,
 };

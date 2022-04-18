@@ -5,6 +5,7 @@ import './App.css';
 import Auth from './features/Auth';
 import HomePage from './features/HomePage';
 import Landing from './features/Landing';
+import InvitePage from './features/InvitePage';
 
 function App() {
   const currentUser = useSelector((state) => state.user.current);
@@ -14,7 +15,11 @@ function App() {
   useEffect(
     () => {
       if (currentUser._id) {
-        navigate('/home-page/newfeed');
+        if (location.pathname === '/') {
+          navigate('/home-page/newfeed');
+        } else {
+          navigate(location.pathname);
+        }
       }
     },
     // eslint-disable-next-line
@@ -26,6 +31,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/auth/*" element={<Auth />} />
         <Route path="/home-page/*" element={<HomePage />} />
+        <Route path="/invite/*" element={<InvitePage />} />
       </Routes>
     </div>
   );
