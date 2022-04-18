@@ -1,14 +1,34 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addTocart } from '../../Cart/CartSlice';
+import { cartApi } from '../../../api/cart';
+import { useSnackbar } from 'notistack';
+import { setCart } from '../../Cart/CartSlice';
 
 function ProductItem({ product }) {
   const currentUser = JSON.parse(localStorage.getItem('USER'));
   const isMyProduct = currentUser._id === product.shopOwner._id;
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const getCart = async () => {
+    const response = await cartApi.getCart();
+    dispatch(setCart(response?.data?.cartItems));
+  };
 
   const handleAddToCart = async () => {
-    dispatch(addTocart(product));
+    try {
+      await cartApi.addToCart({
+        productId: product._id,
+      });
+      enqueueSnackbar('Add to cart successfully', {
+        variant: 'success',
+      });
+      await getCart();
+    } catch (error) {
+      enqueueSnackbar(error.message, {
+        variant: 'error',
+      });
+    }
   };
 
   return (

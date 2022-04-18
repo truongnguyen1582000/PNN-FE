@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CartList from './components/CartList';
 import { cartTotalSelector } from '../../utils/selector';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PopupInvite from './components/PopupInvite';
+import { cartApi } from '../../api/cart';
+import { setCart } from '../Cart/CartSlice';
 
 function Cart(props) {
   const total = useSelector(cartTotalSelector);
   const [showPopupInvite, setShowPopupInvite] = useState(false);
+  const dispatch = useDispatch();
+
+  const getCart = async () => {
+    const response = await cartApi.getCart();
+    dispatch(setCart(response?.data?.cartItems));
+  };
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
   return (
     <div className="large-size cart">
       <button

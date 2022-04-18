@@ -1,31 +1,46 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addMore, descreaseItem, setQuanity } from '../CartSlice';
+import { cartApi } from '../../../api/cart';
+import { setCart } from '../../Cart/CartSlice';
 
 function CartItem({ item }) {
+  console.log(item);
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(item.count);
-  const handleAddMore = () => {
-    dispatch(addMore(item));
+
+  const getCart = async () => {
+    const response = await cartApi.getCart();
+    dispatch(setCart(response?.data?.cartItems));
   };
 
-  const handleDescreaseItem = () => {
-    dispatch(descreaseItem(item, -1));
+  const handleIncrease = async () => {
+    await cartApi.addToCart({
+      productId: item.product._id,
+    });
+
+    await getCart();
   };
 
-  const handleChange = (e) => {
-    setQuantity(e.target.value);
-    dispatch(setQuanity({ item, quantity: e.target.value }));
+  const handleDecrease = async () => {
+    await cartApi.addToCart({
+      productId: item.product._id,
+    });
+
+    await getCart();
   };
+
+  // const handleChange = (e) => {
+  //   setQuantity(e.target.value);
+  //   dispatch(setQuanity({ item, quantity: e.target.value }));
+  // };
 
   return (
     <div className="cart-item">
       <div className="cart-item-img">
-        <img src={item.image} alt="" />
+        <img src={item.product.image} alt="" />
         <div>
-          <p>{item.name}</p>
+          <p>{item.product.name}</p>
           <p className="cart-item-price">
-            {item.price.toLocaleString('it-IT', {
+            {item.product?.price.toLocaleString('it-IT', {
               style: 'currency',
               currency: 'VND',
             })}
@@ -33,11 +48,11 @@ function CartItem({ item }) {
         </div>
       </div>
       <div className="quantity">
-        <button className="btn btn-primary" onClick={handleDescreaseItem}>
+        <button className="btn btn-primary" onClick={handleDecrease}>
           -
         </button>
-        <input type="text" value={quantity} onChange={handleChange} />
-        <button className="btn btn-primary" onClick={handleAddMore}>
+        <input type="text" value={item.quantity} />
+        <button className="btn btn-primary" onClick={handleIncrease}>
           +
         </button>
       </div>

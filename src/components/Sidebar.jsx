@@ -1,10 +1,21 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { cartApi } from '../api/cart';
+import { setCart } from '../features/Cart/CartSlice';
 
 function Sidebar(props) {
   const cartList = useSelector((state) => state.cart);
-  console.log(cartList.list.length);
+  const dispatch = useDispatch();
+
+  const getCart = async () => {
+    const response = await cartApi.getCart();
+    dispatch(setCart(response?.data?.cartItems));
+  };
+
+  useEffect(() => {
+    getCart();
+  }, []);
 
   return (
     <ul className="sidebar">
