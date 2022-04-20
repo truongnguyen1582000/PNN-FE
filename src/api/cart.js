@@ -25,10 +25,28 @@ const getShareToken = () => {
   return axiosClient.get(url);
 };
 
+const getCartByToken = (token) => {
+  const url = `/cart/getCartByToken/${token}`;
+  return axiosClient.get(url);
+};
+
+const getCartById = (cartId) => {
+  const url = `/cart/${cartId}`;
+  return axiosClient.get(url);
+};
+
+const addToCartById = (cartId, data) => {
+  const url = `/cart/addToCart/${cartId}/`;
+  return axiosClient.post(url, data);
+};
+
 export const cartApi = {
   setLimitMoney,
   addToCart,
   getCart,
   deleteCartItem,
   getShareToken,
+  getCartByToken,
+  getCartById,
+  addToCartById,
 };

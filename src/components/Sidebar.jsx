@@ -1,22 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { cartApi } from '../api/cart';
-import { setCart } from '../features/Cart/CartSlice';
+import { getCart } from '../features/Cart/CartSlice';
 
 function Sidebar(props) {
   const cartList = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const getCart = async () => {
-    const response = await cartApi.getCart();
-    localStorage.setItem('cartId', response?.data?._id);
-    dispatch(setCart(response?.data?.cartItems));
+  const getCartData = async () => {
+    await dispatch(getCart());
   };
 
   useEffect(
     () => {
-      getCart();
+      getCartData();
     },
     // eslint-disable-next-line
     []
@@ -79,6 +76,15 @@ function Sidebar(props) {
           <div className="cart-counter">
             <span className="counter">{cartList.list.length}</span>
           </div>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/home-page/group-order"
+          className={({ isActive }) => (isActive ? 'activeNav' : '')}
+        >
+          <i className="fa-solid fa-backpack"></i>
+          <span>Group order</span>
         </NavLink>
       </li>
       <li>

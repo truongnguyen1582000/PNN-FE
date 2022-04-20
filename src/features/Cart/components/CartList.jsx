@@ -1,21 +1,27 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import CartItem from './CartItem';
 
-function CartList(props) {
-  const cartList = useSelector((state) => state.cart);
-
+function CartList({ cartList = [] }) {
+  const isShow = cartList?.list?.length === 0 || cartList.length === 0;
   return (
     <div className="cart-list">
-      {cartList.list.map((item, index) => (
-        <CartItem item={item} key={index} />
-      ))}
-      {cartList.list.length === 0 ? (
+      {isShow && (
         <div className="cart-empty">
           <i className="fa-solid fa-shopping-cart"></i>
           <span>Your cart is empty</span>
+          <p
+            style={{
+              fontSize: '16px',
+              marginTop: '9px',
+            }}
+          >
+            Let's buy some thing
+          </p>
         </div>
-      ) : null}
+      )}
+      {cartList?.list?.map((item, index) => (
+        <CartItem item={item} key={index} />
+      ))}
     </div>
   );
 }

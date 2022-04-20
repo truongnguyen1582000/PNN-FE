@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import HomeNavbar from '../../components/HomeNavbar';
 import Loading from '../../components/Loading';
 import Sidebar from '../../components/Sidebar';
@@ -11,15 +17,25 @@ import Knowledge from '../Knowledge';
 import Newfeed from '../Newfeeds';
 import Shop from '../Shop';
 import Shopping from '../Shopping';
+import GroupOrder from '../GroupOrder';
 
 function HomePage(props) {
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(
     () => {
       setTimeout(() => {
         setLoading(false);
       }, 1);
     },
+    // eslint-disable-next-line
+    []
+  );
+
+  useEffect(
+    () => {},
     // eslint-disable-next-line
     []
   );
@@ -45,6 +61,7 @@ function HomePage(props) {
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/knowledge" element={<Knowledge />} />
                   <Route path="/bookmark" element={<Bookmark />} />
+                  <Route path="/group-order" element={<GroupOrder />} />
                 </Routes>
               </div>
             </div>

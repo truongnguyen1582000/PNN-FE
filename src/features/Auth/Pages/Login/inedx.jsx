@@ -44,6 +44,7 @@ function Login() {
       <input
         type="password"
         name="password"
+        autoComplete="true"
         placeholder="Password"
         onChange={handleInputChange}
       />

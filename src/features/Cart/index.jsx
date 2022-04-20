@@ -1,39 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import CartList from './components/CartList';
 import { cartTotalSelector } from '../../utils/selector';
 import { useDispatch, useSelector } from 'react-redux';
-import PopupInvite from './components/PopupInvite';
-import { cartApi } from '../../api/cart';
-import { setCart } from '../Cart/CartSlice';
+import { getCart } from '../Cart/CartSlice';
 
 function Cart(props) {
   const total = useSelector(cartTotalSelector);
-  const [showPopupInvite, setShowPopupInvite] = useState(false);
+  const cartList = useSelector((state) => state.cart);
+
   const dispatch = useDispatch();
 
-  const getCart = async () => {
-    const response = await cartApi.getCart();
-    dispatch(setCart(response?.data?.cartItems));
+  const getCartData = async () => {
+    await dispatch(getCart());
   };
 
-  useEffect(() => {
-    getCart();
-  }, []);
+  useEffect(
+    () => {
+      getCartData();
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <div className="large-size cart">
-      <button
-        className="invite-friend"
-        onClick={() => setShowPopupInvite(true)}
-      >
-        <i className="fa-solid fa-user-friends"></i>
-        <span>Invite a friend</span>
-      </button>
-      <PopupInvite
-        showPopupInvite={showPopupInvite}
-        setShowPopupInvite={setShowPopupInvite}
-      />
-      <CartList />
+      <CartList cartList={cartList} />
       <button
         className={
           total === 0

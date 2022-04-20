@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { cartApi } from '../../../api/cart';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import jwt_decode from 'jwt-decode';
 
 function PopupInvite({ showPopupInvite, setShowPopupInvite }) {
   const [value, setvalue] = useState(0);

@@ -14,13 +14,15 @@ function App() {
 
   useEffect(
     () => {
-      if (currentUser._id) {
-        if (location.pathname === '/') {
-          navigate('/home-page/newfeed');
-        } else {
-          navigate(location.pathname);
-        }
-      }
+      // if (currentUser._id) {
+      //   if (location.pathname === '/home-page') {
+      //     return navigate('/home-page/newfeed');
+      //   } else {
+      //     navigate(location.pathname);
+      //   }
+      // } else {
+      //   return navigate('/');
+      // }
     },
     // eslint-disable-next-line
     [location.pathname === '/']

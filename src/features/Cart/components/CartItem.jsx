@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { cartApi } from '../../../api/cart';
-import { setCart } from '../../Cart/CartSlice';
+import { getCart } from '../../Cart/CartSlice';
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
+  const currentUser = JSON.parse(localStorage.getItem('USER'));
 
-  const getCart = async () => {
-    const response = await cartApi.getCart();
-    dispatch(setCart(response?.data?.cartItems));
+  const getCartData = async () => {
+    await dispatch(getCart());
   };
 
+  useEffect(
+    () => {
+      getCartData();
+    },
+    // eslint-disable-next-line
+    []
+  );
   const handleIncrease = async () => {
     await cartApi.addToCart({
       productId: item.product._id,
     });
 
-    await getCart();
+    await getCartData();
   };
 
   const handleDecrease = async () => {
@@ -25,7 +32,7 @@ function CartItem({ item }) {
       number: -1,
     });
 
-    await getCart();
+    await getCartData();
   };
 
   const handleDeleteCartItem = async () => {
@@ -33,7 +40,7 @@ function CartItem({ item }) {
       productId: item.product._id,
     });
 
-    await getCart();
+    await getCartData();
   };
 
   const handleChange = async (e) => {
@@ -42,7 +49,7 @@ function CartItem({ item }) {
       number: e.target.value,
     });
 
-    await getCart();
+    await getCartData();
   };
 
   return (

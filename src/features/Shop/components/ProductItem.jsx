@@ -1,21 +1,36 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { cartApi } from '../../../api/cart';
 import { useSnackbar } from 'notistack';
-import { setCart } from '../../Cart/CartSlice';
+import { getCart } from '../../Cart/CartSlice';
+import PopupChooseCart from '../../Shopping/components/PopupChooseCart';
+import { groupOrderAPI } from '../../../api/groupOrder';
+import { getGroupOrderCart } from '../../GroupOrder/GroupOrderSlice';
 
 function ProductItem({ product }) {
   const currentUser = JSON.parse(localStorage.getItem('USER'));
   const isMyProduct = currentUser._id === product.shopOwner._id;
-  const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
+  const GOcart = useSelector((state) => state.GOcart);
+  const [showPopup, setShowPopup] = useState(false);
 
-  const getCart = async () => {
-    const response = await cartApi.getCart();
-    dispatch(setCart(response?.data?.cartItems));
+  const getCartData = async () => {
+    await dispatch(getCart());
   };
 
+  useEffect(
+    () => {
+      getCartData();
+    },
+    // eslint-disable-next-line
+    []
+  );
+
   const handleAddToCart = async () => {
+    if (GOcart.list.length !== 0) {
+      return setShowPopup(true);
+    }
     try {
       await cartApi.addToCart({
         productId: product._id,
@@ -23,7 +38,43 @@ function ProductItem({ product }) {
       enqueueSnackbar('Add to cart successfully', {
         variant: 'success',
       });
-      await getCart();
+      await getCartData();
+    } catch (error) {
+      enqueueSnackbar(error.message, {
+        variant: 'error',
+      });
+    }
+  };
+
+  const handleGetGroupOrder = async () => {
+    dispatch(getGroupOrderCart());
+  };
+
+  const handleAddToMyCart = async () => {
+    try {
+      await cartApi.addToCart({
+        productId: product._id,
+      });
+      enqueueSnackbar('Add to cart successfully', {
+        variant: 'success',
+      });
+      await handleGetGroupOrder();
+    } catch (error) {
+      enqueueSnackbar(error.message, {
+        variant: 'error',
+      });
+    }
+  };
+
+  const handleAddToGroupCart = async (id) => {
+    try {
+      await groupOrderAPI.addToGO(id, {
+        productId: product._id,
+      });
+      enqueueSnackbar(`Add to group order ${id} successfully`, {
+        variant: 'success',
+      });
+      await getCartData();
     } catch (error) {
       enqueueSnackbar(error.message, {
         variant: 'error',
@@ -49,6 +100,13 @@ function ProductItem({ product }) {
           <div className="add-to-cart" onClick={handleAddToCart}>
             <button className="btn btn-primary">Add to cart</button>
           </div>
+        )}
+        {showPopup && (
+          <PopupChooseCart
+            closePopup={() => setShowPopup(false)}
+            handleAddToMyCart={handleAddToMyCart}
+            handleAddToGroupCart={handleAddToGroupCart}
+          />
         )}
       </div>
     </div>
