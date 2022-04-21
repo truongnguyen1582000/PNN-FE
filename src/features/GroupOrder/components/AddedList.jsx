@@ -1,19 +1,12 @@
 import React from 'react';
-import GOitem from './GOitem';
+import AddedItem from './AddedItem';
 
-function GOList({ cartList }) {
-  console.log(cartList);
+function AddedList({ info, cartId }) {
+  const infos = Array.from(info.items);
+
   return (
-    <div className="box">
-      {cartList.length > 0 && (
-        <>
-          {cartList?.map((item, index) => (
-            <GOitem item={item} key={index} cartId={item._id} />
-          ))}
-        </>
-      )}
-
-      {cartList.length === 0 && (
+    <div>
+      {infos.length === 0 && (
         <div className="cart-empty">
           <i className="fa-solid fa-backpack"></i>
           <span>Your group cart is empty</span>
@@ -27,8 +20,15 @@ function GOList({ cartList }) {
           </p>
         </div>
       )}
+      {infos.length > 0 && (
+        <>
+          {infos.map((e, idx) => (
+            <AddedItem product={e} key={idx} cartId={cartId} />
+          ))}
+        </>
+      )}
     </div>
   );
 }
 
-export default GOList;
+export default AddedList;

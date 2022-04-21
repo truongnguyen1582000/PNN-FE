@@ -58,7 +58,7 @@ function ProductItem({ product }) {
       enqueueSnackbar('Add to cart successfully', {
         variant: 'success',
       });
-      await handleGetGroupOrder();
+      await getCartData();
     } catch (error) {
       enqueueSnackbar(error.message, {
         variant: 'error',

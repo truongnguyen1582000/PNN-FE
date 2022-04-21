@@ -15,8 +15,38 @@ const addToGO = (id, data) => {
   return axiosClient.post(url, data);
 };
 
+const getToken = (id) => {
+  const url = '/group-order/shareToken/' + id;
+  return axiosClient.get(url);
+};
+
+const setLimitMoney = (data) => {
+  const url = '/group-order/setLimitMoney/';
+  return axiosClient.post(url, data);
+};
+
+const delelteGO = (id) => {
+  const url = '/group-order/' + id;
+  return axiosClient.delete(url);
+};
+
+const deleteItemFromGO = (cartId, productId) => {
+  const url = '/group-order/' + cartId + '/' + productId;
+  return axiosClient.delete(url);
+};
+
+const addMoreItemToGO = (cartId, productId, data) => {
+  const url = '/group-order/addMoreItem/' + cartId + '/' + productId;
+  return axiosClient.post(url, data);
+};
+
 export const groupOrderAPI = {
   createGO,
   getGO,
   addToGO,
+  getToken,
+  setLimitMoney,
+  delelteGO,
+  deleteItemFromGO,
+  addMoreItemToGO,
 };

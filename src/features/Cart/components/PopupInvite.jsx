@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
-import { cartApi } from '../../../api/cart';
+import { groupOrderAPI } from '../../../api/groupOrder';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-function PopupInvite({ showPopupInvite, setShowPopupInvite }) {
+function PopupInvite({ showPopupInvite, closePopup, cartId }) {
   const [value, setvalue] = useState(0);
   const { enqueueSnackbar } = useSnackbar();
   const [changeComponent, setChangeComponent] = useState(false);
@@ -11,9 +11,7 @@ function PopupInvite({ showPopupInvite, setShowPopupInvite }) {
   const [token, setToken] = useState('');
 
   const getToken = async () => {
-    const response = await cartApi.getShareToken({
-      cartId: localStorage.getItem('cartId'),
-    });
+    const response = await groupOrderAPI.getToken(cartId);
 
     setToken(response?.data);
   };
@@ -30,8 +28,8 @@ function PopupInvite({ showPopupInvite, setShowPopupInvite }) {
 
   const handleStartGOrder = async () => {
     try {
-      await cartApi.setLimitMoney({
-        cartId: localStorage.getItem('cartId'),
+      await groupOrderAPI.setLimitMoney({
+        cartId: cartId,
         limitMoney: value,
       });
       setChangeComponent(true);
@@ -56,7 +54,7 @@ function PopupInvite({ showPopupInvite, setShowPopupInvite }) {
               <button
                 className="close-popup"
                 onClick={() => {
-                  setShowPopupInvite(false);
+                  closePopup();
                   setChangeComponent(false);
                 }}
               >

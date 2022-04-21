@@ -342,7 +342,7 @@
 
 .box {
   background-color: #fff;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 8px;
@@ -863,6 +863,15 @@
   color: #5e6e82;
 }
 
+.btn-danger {
+  background-color: #ff005d;
+  color: #fff;
+}
+
+.delete-go {
+  margin-left: auto;
+}
+
 .cart-list {
   padding: 8px 8px;
   padding-top: 16px;
@@ -936,18 +945,13 @@
   background-color: rgb(21, 138, 222);
   border-radius: 16px;
   padding: 8px;
-  margin-bottom: 8px;
   color: #fff;
+  margin-left: 16px;
 }
 
 .cart {
   display: flex;
   flex-direction: column;
-}
-
-.invite-friend {
-  width: 160px;
-  margin-left: auto;
 }
 
 .invite-friend i {
@@ -1126,4 +1130,10 @@
   font-size: 14px;
   text-align: center;
   margin-bottom: 4px;
+}
+
+.go-body {
+  margin-top: 8px;
+  padding-right: 0;
+  padding-left: 0;
 }

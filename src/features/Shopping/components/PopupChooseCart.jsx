@@ -1,6 +1,5 @@
-import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function PopupChooseCart({
   closePopup,
@@ -46,7 +45,10 @@ function PopupChooseCart({
           >
             <button
               className="btn btn-primary go-cart"
-              onClick={handleAddToMyCart}
+              onClick={() => {
+                handleAddToMyCart();
+                closePopup();
+              }}
             >
               My cart
             </button>
