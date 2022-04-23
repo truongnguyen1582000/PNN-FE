@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { groupOrderAPI } from '../../../api/groupOrder';
 import { getGroupOrderCart } from '../GroupOrderSlice';
 
-function AddedItem({ product, cartId }) {
+function AddedItem({ product, cartId, isItemOwner }) {
   const dispatch = useDispatch();
 
   const handleIncreaseGOCartItem = async () => {
@@ -40,21 +40,27 @@ function AddedItem({ product, cartId }) {
       <div className="cart-action">
         <div className="quantity">
           <button
-            className="btn btn-primary"
+            className={`btn btn-primary ${!isItemOwner ? 'disabled' : ''}`}
             onClick={handleDecreaseGOCartItem}
+            disabled={!isItemOwner}
           >
             -
           </button>
-          <input type="text" value={product.quantity} />
+          <input type="text" value={product.quantity} readOnly />
           <button
-            className="btn btn-primary"
+            className={`btn btn-primary ${!isItemOwner ? 'disabled' : ''}`}
             onClick={handleIncreaseGOCartItem}
+            disabled={!isItemOwner}
           >
             +
           </button>
         </div>
         <div className="delete-cart-item">
-          <button className="btn btn-danger" onClick={handleDeleteItem}>
+          <button
+            className={`btn btn-danger ${isItemOwner ? '' : 'disabled'}`}
+            onClick={handleDeleteItem}
+            disabled={!isItemOwner}
+          >
             <i className="fas fa-trash-alt"></i>
           </button>
         </div>

@@ -43,14 +43,14 @@ function CartItem({ item }) {
     await getCartData();
   };
 
-  const handleChange = async (e) => {
-    await cartApi.addToCart({
-      productId: item.product._id,
-      number: e.target.value,
-    });
+  // const handleChange = async (e) => {
+  //   await cartApi.addToCart({
+  //     productId: item.product._id,
+  //     number: e.target.value,
+  //   });
 
-    await getCartData();
-  };
+  //   await getCartData();
+  // };
 
   return (
     <div className="cart-item">
@@ -71,7 +71,7 @@ function CartItem({ item }) {
           <button className="btn btn-primary" onClick={handleDecrease}>
             -
           </button>
-          <input type="text" value={item.quantity} onChange={handleChange} />
+          <input type="text" value={item.quantity} readOnly />
           <button className="btn btn-primary" onClick={handleIncrease}>
             +
           </button>

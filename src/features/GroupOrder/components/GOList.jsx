@@ -1,8 +1,8 @@
 import React from 'react';
 import GOitem from './GOitem';
+import { Link } from 'react-router-dom';
 
 function GOList({ cartList }) {
-  console.log(cartList);
   return (
     <div className="box">
       {cartList.length > 0 && (
@@ -15,7 +15,9 @@ function GOList({ cartList }) {
 
       {cartList.length === 0 && (
         <div className="cart-empty">
-          <i className="fa-solid fa-backpack"></i>
+          <Link to="/home-page/shoping">
+            <i className="fa-solid fa-backpack"></i>
+          </Link>
           <span>Your group cart is empty</span>
           <p
             style={{

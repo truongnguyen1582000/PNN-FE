@@ -10,7 +10,6 @@ function PopupChooseCart({
   const GOcart = useSelector((state) => state.GOcart);
 
   const handleAddToGO = async () => {
-    console.log(cart);
     handleAddToGroupCart(cart);
     closePopup();
   };

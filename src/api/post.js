@@ -16,7 +16,6 @@ const likePost = (postId) => {
 };
 
 const commentPost = (postId, data) => {
-  console.log(postId);
   const url = '/posts/' + postId + '/comment';
   return axiosClient.post(url, data);
 };

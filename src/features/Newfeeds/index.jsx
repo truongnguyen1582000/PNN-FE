@@ -10,10 +10,8 @@ function Newfeed(props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const getPostList = async () => {
-    console.log('x');
     try {
       const { data } = await postApi.getAllPost();
-      console.log(data);
       setPostList(data);
     } catch (error) {
       enqueueSnackbar(error.message, { variant: 'error' });

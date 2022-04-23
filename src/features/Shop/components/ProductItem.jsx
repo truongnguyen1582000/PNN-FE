@@ -6,8 +6,9 @@ import { getCart } from '../../Cart/CartSlice';
 import PopupChooseCart from '../../Shopping/components/PopupChooseCart';
 import { groupOrderAPI } from '../../../api/groupOrder';
 import { getGroupOrderCart } from '../../GroupOrder/GroupOrderSlice';
+import { productApi } from '../../../api/product';
 
-function ProductItem({ product }) {
+function ProductItem({ product, getProductList }) {
   const currentUser = JSON.parse(localStorage.getItem('USER'));
   const isMyProduct = currentUser._id === product.shopOwner._id;
   const { enqueueSnackbar } = useSnackbar();
@@ -46,9 +47,9 @@ function ProductItem({ product }) {
     }
   };
 
-  const handleGetGroupOrder = async () => {
-    dispatch(getGroupOrderCart());
-  };
+  // const handleGetGroupOrder = async () => {
+  //   dispatch(getGroupOrderCart());
+  // };
 
   const handleAddToMyCart = async () => {
     try {
@@ -71,7 +72,7 @@ function ProductItem({ product }) {
       await groupOrderAPI.addToGO(id, {
         productId: product._id,
       });
-      enqueueSnackbar(`Add to group order ${id} successfully`, {
+      enqueueSnackbar(`Add product to group order successfully`, {
         variant: 'success',
       });
       await getCartData();
@@ -84,31 +85,59 @@ function ProductItem({ product }) {
 
   return (
     <div>
-      <div className="product-item box">
-        <img src={product.image} alt="" />
-        <div className="bottom">
-          <p>{product.name}</p>
-          <p>
-            {product.price.toLocaleString('it-IT', {
-              style: 'currency',
-              currency: 'VND',
-            })}
-          </p>
-        </div>
-
-        {!isMyProduct && (
-          <div className="add-to-cart" onClick={handleAddToCart}>
-            <button className="btn btn-primary">Add to cart</button>
+      {product && (
+        <div className="product-item box">
+          <img src={product.image} alt="" />
+          <div className="bottom">
+            <div>
+              <p>{product.name}</p>
+              <p>
+                {product.price.toLocaleString('it-IT', {
+                  style: 'currency',
+                  currency: 'VND',
+                })}
+              </p>
+            </div>
+            {/* delete product button */}
+            {isMyProduct && (
+              <button
+                className="btn btn-danger delete-product"
+                style={{
+                  height: '30px',
+                }}
+                onClick={async () => {
+                  try {
+                    await productApi.deleteProduct(product._id);
+                    enqueueSnackbar('Delete product successfully', {
+                      variant: 'success',
+                    });
+                    await getProductList();
+                  } catch (error) {
+                    enqueueSnackbar(error.message, {
+                      variant: 'error',
+                    });
+                  }
+                }}
+              >
+                <i className="fa-solid fa-trash-alt"></i>
+              </button>
+            )}
           </div>
-        )}
-        {showPopup && (
-          <PopupChooseCart
-            closePopup={() => setShowPopup(false)}
-            handleAddToMyCart={handleAddToMyCart}
-            handleAddToGroupCart={handleAddToGroupCart}
-          />
-        )}
-      </div>
+
+          {!isMyProduct && (
+            <div className="add-to-cart" onClick={handleAddToCart}>
+              <button className="btn btn-primary">Add to cart</button>
+            </div>
+          )}
+          {showPopup && (
+            <PopupChooseCart
+              closePopup={() => setShowPopup(false)}
+              handleAddToMyCart={handleAddToMyCart}
+              handleAddToGroupCart={handleAddToGroupCart}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

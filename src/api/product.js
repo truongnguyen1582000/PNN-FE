@@ -15,8 +15,14 @@ const getMyProduct = () => {
   return axiosClient.get(url);
 };
 
+const deleteProduct = (id) => {
+  const url = `/products/${id}`;
+  return axiosClient.delete(url);
+};
+
 export const productApi = {
   createProduct,
   getProductList,
   getMyProduct,
+  deleteProduct,
 };

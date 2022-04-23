@@ -35,13 +35,33 @@ function PostItem({ post, getPostList }) {
         <img src={post.imgUrl} alt="" />
       </div>
       <div className="post-action">
+        <span>
+          {post.likes?.length > 0 && (
+            <span className="like-count">
+              {/* show 2 people name had like post */}
+              {post.likes
+                ?.splice(0, post.likes.length > 2 ? 2 : post.likes.length)
+                .map((e) => e.username)
+                .join(', ')}{' '}
+              {post.likes.length > 1 && (
+                <span>
+                  {' '}
+                  and {post.likes.length > 0 && post.likes.length} others
+                </span>
+              )}
+              liked this post
+            </span>
+          )}
+        </span>
+      </div>
+      <div className="post-action">
         <div className="like" onClick={handleLikePost}>
           {isLikedPost ? (
             <i className="fa-solid fa-heart liked"></i>
           ) : (
             <i className="fa-light fa-heart"></i>
           )}
-          <span>Like</span>
+          <p>Like</p>
         </div>
         <div className="bookmark-save">
           <i className="fa-light fa-bookmark"></i>

@@ -10,6 +10,7 @@ function GroupOrder(props) {
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
   const groupOrder = useSelector((state) => state.GOcart);
+
   const { enqueueSnackbar } = useSnackbar();
 
   const handleGetGroupOrder = async () => {
@@ -17,7 +18,9 @@ function GroupOrder(props) {
   };
 
   useEffect(() => {
-    handleGetGroupOrder();
+    setInterval(() => {
+      handleGetGroupOrder();
+    }, 5000);
   }, []);
 
   const handleCreateGO = async (GOName) => {
@@ -44,7 +47,11 @@ function GroupOrder(props) {
         showPopupInvite={showPopupInvite}
         setShowPopupInvite={setShowPopupInvite}
       /> */}
-      <button className="invite-friend" onClick={() => setShowPopup(true)}>
+      <button
+        className="invite-friend"
+        onClick={() => setShowPopup(true)}
+        style={{ marginBottom: '8px' }}
+      >
         <i className="fa-solid fa-plus-large"></i>
         <span>Create group order</span>
       </button>

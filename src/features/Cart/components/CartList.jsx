@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
 
 function CartList({ cartList = [] }) {
@@ -7,7 +8,9 @@ function CartList({ cartList = [] }) {
     <div className="cart-list">
       {isShow && (
         <div className="cart-empty">
-          <i className="fa-solid fa-shopping-cart"></i>
+          <Link to="/home-page/shoping">
+            <i className="fa-solid fa-shopping-cart"></i>
+          </Link>
           <span>Your cart is empty</span>
           <p
             style={{

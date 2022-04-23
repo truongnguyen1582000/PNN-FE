@@ -32,7 +32,6 @@ function Cart(props) {
             : 'btn btn-primary checkout-btn'
         }
         disabled={total === 0}
-        onClick={() => console.log('first')}
       >
         <span>Go to checkout: </span>
         {total.toLocaleString('it-IT', {

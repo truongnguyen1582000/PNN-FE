@@ -1,31 +1,25 @@
-import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { groupOrderAPI } from '../../api/groupOrder';
+import { useSnackbar } from 'notistack';
 
 function InvitePage(props) {
   const location = useLocation();
   const token = location.pathname.split('/').pop();
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const getCart = async () => {
-    try {
-    } catch (error) {
-      enqueueSnackbar(error.message, { variant: 'error' });
+  const getGO = async () => {
+    const res = await groupOrderAPI.getGroupOrderByToken(token);
+    if (res.message) {
+      enqueueSnackbar(res.message, { variant: 'info' });
     }
+    navigate('/home-page/group-order');
   };
 
-  useEffect(
-    () => {
-      getCart();
-    },
-    // eslint-disable-next-line
-    []
-  );
-
+  useEffect(() => {
+    getGO();
+  });
   return <div>InvitePage</div>;
 }
 

@@ -4,9 +4,12 @@ import AddedList from './AddedList';
 function OrderList({ list, cartId }) {
   return (
     <div className="go-item box">
-      <div className="go-header" style={{ width: '100%' }}>
+      <div
+        className="go-header"
+        style={{ width: '100%', flexDirection: 'column' }}
+      >
         {list.info.map((item, index) => (
-          <div className="go-item" key={index} style={{ width: '100%' }}>
+          <div className="go-item-inner" key={index} style={{ width: '100%' }}>
             <div key={index} className="go-header">
               <img
                 src={item.addedBy.avatar}

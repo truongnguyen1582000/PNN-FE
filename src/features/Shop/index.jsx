@@ -5,8 +5,8 @@ import ProductList from './components/ProductList';
 
 function Shop(props) {
   const [productList, setProductList] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
 
-  // get product list func with try catch
   const getProductList = async () => {
     try {
       const { data } = await productApi.getMyProduct();
@@ -22,9 +22,21 @@ function Shop(props) {
 
   return (
     <div className="box large-size">
-      <CreateProductForm getProductList={getProductList} />
-      <hr />
-      <ProductList productList={productList} />
+      <button
+        className="btn invite-friend create-product-btn"
+        onClick={() => setShowPopup(true)}
+      >
+        <i className="fas fa-plus-circle"></i>
+        <span>Create Product</span>
+      </button>
+
+      <CreateProductForm
+        getProductList={getProductList}
+        showPopup={showPopup}
+        closePopup={() => setShowPopup(false)}
+      />
+
+      <ProductList productList={productList} getProductList={getProductList} />
     </div>
   );
 }

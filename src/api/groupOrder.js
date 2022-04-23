@@ -40,6 +40,16 @@ const addMoreItemToGO = (cartId, productId, data) => {
   return axiosClient.post(url, data);
 };
 
+const getGroupOrderByToken = (token) => {
+  const url = '/group-order/getGroupOrder/' + token;
+  return axiosClient.get(url);
+};
+
+const leaveGO = (GOCartId) => {
+  const url = '/group-order/leave/' + GOCartId;
+  return axiosClient.delete(url);
+};
+
 export const groupOrderAPI = {
   createGO,
   getGO,
@@ -49,4 +59,6 @@ export const groupOrderAPI = {
   delelteGO,
   deleteItemFromGO,
   addMoreItemToGO,
+  getGroupOrderByToken,
+  leaveGO,
 };
