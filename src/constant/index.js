@@ -1,7 +1,7 @@
-const STATIC_HOST = 'http://localhost:3001/api';
-const SOCKET_HOST = 'http://localhost:3001/';
+const STATIC_HOST = process.env.REACT_APP_API_URL;
+const SOCKET_HOST = process.env.REACT_APP_SOCKET_URL;
 // const STATIC_HOST = 'https://san-capstone.herokuapp.com/api';
-const secretKey = 'C2SE.13';
+const secretKey = process.env.REACT_APP_SECRET_KEY;
 
 module.exports = {
   STATIC_HOST,

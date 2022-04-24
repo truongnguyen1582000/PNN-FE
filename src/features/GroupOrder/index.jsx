@@ -17,11 +17,15 @@ function GroupOrder(props) {
     dispatch(getGroupOrderCart());
   };
 
-  useEffect(() => {
-    setInterval(() => {
-      handleGetGroupOrder();
-    }, 5000);
-  }, []);
+  useEffect(
+    () => {
+      setInterval(() => {
+        handleGetGroupOrder();
+      }, 3000);
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   const handleCreateGO = async (GOName) => {
     if (!GOName) {

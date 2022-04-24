@@ -24,6 +24,7 @@ const cartSlice = createSlice({
   },
 });
 
-const { actions, reducer } = cartSlice;
-export const {} = actions;
+// const { actions, reducer } = cartSlice;
+const { reducer } = cartSlice;
+// export const {} = actions;
 export default reducer;

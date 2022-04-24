@@ -5,7 +5,6 @@ import { useSnackbar } from 'notistack';
 import { getCart } from '../../Cart/CartSlice';
 import PopupChooseCart from '../../Shopping/components/PopupChooseCart';
 import { groupOrderAPI } from '../../../api/groupOrder';
-import { getGroupOrderCart } from '../../GroupOrder/GroupOrderSlice';
 import { productApi } from '../../../api/product';
 
 function ProductItem({ product, getProductList }) {

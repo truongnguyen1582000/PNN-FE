@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Auth from './features/Auth';
 import HomePage from './features/HomePage';
@@ -8,8 +7,6 @@ import Landing from './features/Landing';
 import InvitePage from './features/InvitePage';
 
 function App() {
-  const currentUser = useSelector((state) => state.user.current);
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(

@@ -5,7 +5,6 @@ import { getCart } from '../../Cart/CartSlice';
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
-  const currentUser = JSON.parse(localStorage.getItem('USER'));
 
   const getCartData = async () => {
     await dispatch(getCart());

@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Route,
-  Routes,
-  Navigate,
-  useNavigate,
-  useLocation,
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import HomeNavbar from '../../components/HomeNavbar';
 import Loading from '../../components/Loading';
 import Sidebar from '../../components/Sidebar';
@@ -21,8 +15,6 @@ import GroupOrder from '../GroupOrder';
 
 function HomePage(props) {
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(
     () => {
