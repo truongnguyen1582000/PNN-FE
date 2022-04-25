@@ -84,20 +84,22 @@ function GOitem({ item, cartId }) {
       </div>
       <div className="go-body " style={{ width: '100%' }}>
         <OrderList list={item} cartId={cartId} />
-        <button
-          className={
-            total === 0
-              ? 'btn btn-primary checkout-btn not-allowed'
-              : 'btn btn-primary checkout-btn'
-          }
-          disabled={total === 0}
-        >
-          <span>Go to checkout: </span>
-          {total.toLocaleString('it-IT', {
-            style: 'currency',
-            currency: 'VND',
-          })}
-        </button>
+        {isCartOwner && (
+          <button
+            className={
+              total === 0
+                ? 'btn btn-primary checkout-btn not-allowed'
+                : 'btn btn-primary checkout-btn'
+            }
+            disabled={total === 0}
+          >
+            <span>Go to checkout: </span>
+            {total.toLocaleString('it-IT', {
+              style: 'currency',
+              currency: 'VND',
+            })}
+          </button>
+        )}
       </div>
     </div>
   );

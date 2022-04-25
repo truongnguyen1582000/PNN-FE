@@ -50,6 +50,15 @@ function Sidebar(props) {
       </li>
       <li>
         <NavLink
+          to="/home-page/rescue"
+          className={({ isActive }) => (isActive ? 'activeNav' : '')}
+        >
+          <i className="fa-solid fa-kit-medical"></i>
+          <span>Rescue</span>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/home-page/shop"
           className={({ isActive }) => (isActive ? 'activeNav' : '')}
         >

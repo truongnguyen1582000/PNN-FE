@@ -3,15 +3,19 @@ import ProductItem from './ProductItem';
 
 function ProductList({ productList, getProductList }) {
   return (
-    <div className="product-list">
-      {productList.map((product) => (
-        <ProductItem
-          product={product}
-          key={product._id}
-          getProductList={getProductList}
-        />
-      ))}
-    </div>
+    <>
+      {productList.length > 0 && (
+        <div className="product-list">
+          {productList.map((product) => (
+            <ProductItem
+              product={product}
+              key={product._id}
+              getProductList={getProductList}
+            />
+          ))}
+        </div>
+      )}
+    </>
   );
 }
 

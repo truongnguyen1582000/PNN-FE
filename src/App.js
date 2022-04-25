@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import Auth from './features/Auth';
 import HomePage from './features/HomePage';
@@ -8,18 +8,16 @@ import InvitePage from './features/InvitePage';
 
 function App() {
   const location = useLocation();
+  const currentUser = JSON.parse(localStorage.getItem('USER'));
+  const navigate = useNavigate();
 
   useEffect(
     () => {
-      // if (currentUser._id) {
-      //   if (location.pathname === '/home-page') {
-      //     return navigate('/home-page/newfeed');
-      //   } else {
-      //     navigate(location.pathname);
-      //   }
-      // } else {
-      //   return navigate('/');
-      // }
+      if (currentUser?._id) {
+        navigate('/home-page/newfeed');
+      } else {
+        return navigate('/');
+      }
     },
     // eslint-disable-next-line
     [location.pathname === '/']

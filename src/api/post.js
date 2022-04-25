@@ -20,9 +20,27 @@ const commentPost = (postId, data) => {
   return axiosClient.post(url, data);
 };
 
+const addToBookmark = (postId) => {
+  const url = '/posts/bookmark/' + postId;
+  return axiosClient.put(url);
+};
+
+const deletePost = (postId) => {
+  const url = '/posts/' + postId;
+  return axiosClient.delete(url);
+};
+
+const getMyPost = () => {
+  const url = '/posts/my-post';
+  return axiosClient.get(url);
+};
+
 export const postApi = {
   createPost,
   getAllPost,
   likePost,
   commentPost,
+  addToBookmark,
+  deletePost,
+  getMyPost,
 };

@@ -1,19 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { postApi } from '../../../api/post';
 import PostComment from './PostComment';
 import PostCommentor from './PostCommentor';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import FlagIcon from '@mui/icons-material/Flag';
 
 function PostItem({ post, getPostList }) {
   const currentUser = useSelector((state) => state.user.current);
   const isLikedPost = post?.likes?.some((e) => e._id === currentUser._id);
+  const isSavePost = post?.bookmark?.some((e) => e === currentUser._id);
+  const isPostOwner = post?.author?._id === currentUser._id;
+  const [showMore, setShowMore] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const handleLikePost = async () => {
     try {
       await postApi.likePost(post._id);
       getPostList();
+    } catch (error) {
+      enqueueSnackbar(error, { variant: 'error' });
+    }
+  };
+
+  const handleSavePost = async () => {
+    try {
+      await postApi.addToBookmark(post._id);
+      getPostList();
+    } catch (error) {
+      enqueueSnackbar(error, { variant: 'error' });
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await postApi.deletePost(post._id);
+      getPostList();
+      setShowMore(false);
     } catch (error) {
       enqueueSnackbar(error, { variant: 'error' });
     }
@@ -29,6 +55,35 @@ function PostItem({ post, getPostList }) {
             <span>{moment(post.createdAt).fromNow()}</span>
           </div>
         </div>
+        <div className="edit-post-button">
+          <MoreVertIcon onClick={() => setShowMore(!showMore)} />
+          {showMore && (
+            <div className="post-option">
+              {isPostOwner && (
+                <i>
+                  <EditIcon
+                    fontSize="small"
+                    onClick={() => setShowMore(false)}
+                  />
+                </i>
+              )}
+              {isPostOwner && (
+                <i>
+                  <DeleteIcon fontSize="small" onClick={handleDelete} />
+                </i>
+              )}
+
+              {!isPostOwner && (
+                <i>
+                  <FlagIcon
+                    fontSize="small"
+                    onClick={() => setShowMore(false)}
+                  />
+                </i>
+              )}
+            </div>
+          )}
+        </div>
       </div>
       <div className="post-content">
         <p>{post.content}</p>
@@ -36,7 +91,7 @@ function PostItem({ post, getPostList }) {
       </div>
       <div className="post-action">
         <span>
-          {post.likes?.length > 0 && (
+          {post.likes.length > 0 && (
             <span className="like-count">
               {/* show 2 people name had like post */}
               {post.likes
@@ -63,8 +118,12 @@ function PostItem({ post, getPostList }) {
           )}
           <p>Like</p>
         </div>
-        <div className="bookmark-save">
-          <i className="fa-light fa-bookmark"></i>
+        <div className="bookmark-save" onClick={handleSavePost}>
+          {isSavePost ? (
+            <i className="fa-solid fa-bookmark saved"></i>
+          ) : (
+            <i className="fa-light fa-bookmark"></i>
+          )}
           <span>Save</span>
         </div>
         <div className="share">
