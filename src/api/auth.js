@@ -10,7 +10,13 @@ const register = (data) => {
   return axiosClient.post(url, data);
 };
 
+const updateAvatar = (data) => {
+  const url = '/auth/updateAvatar';
+  return axiosClient.put(url, data);
+};
+
 export const userAPI = {
   login,
   register,
+  updateAvatar,
 };

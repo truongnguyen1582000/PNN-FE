@@ -58,10 +58,12 @@ function CartItem({ item }) {
         <div>
           <p>{item.product.name}</p>
           <p className="cart-item-price">
-            {item.product?.price.toLocaleString('it-IT', {
-              style: 'currency',
-              currency: 'VND',
-            })}
+            {item.product?.price
+              .toLocaleString('it-IT', {
+                style: 'currency',
+                currency: 'VND',
+              })
+              .replace('VND', '₫')}
           </p>
         </div>
       </div>

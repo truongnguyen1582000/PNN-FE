@@ -19,9 +19,9 @@ function GroupOrder(props) {
 
   useEffect(
     () => {
-      setInterval(() => {
-        handleGetGroupOrder();
-      }, 3000);
+      // setInterval(() => {
+      handleGetGroupOrder();
+      // }, 3000);
     },
     // eslint-disable-next-line
     []
@@ -40,17 +40,6 @@ function GroupOrder(props) {
   };
   return (
     <div className="large-size cart">
-      {/* <button
-        className="invite-friend"
-        onClick={() => setShowPopupInvite(true)}
-      >
-        <i className="fa-solid fa-user-friends"></i>
-        <span>Invite a friend</span>
-      </button>
-      <PopupInvite
-        showPopupInvite={showPopupInvite}
-        setShowPopupInvite={setShowPopupInvite}
-      /> */}
       <button
         className="invite-friend"
         onClick={() => setShowPopup(true)}

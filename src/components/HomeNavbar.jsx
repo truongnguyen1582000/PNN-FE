@@ -43,7 +43,7 @@ function HomeNavbar(props) {
             className="user-account"
             onClick={() => setShowSubMenu(!showSubMenu)}
           >
-            <img src={currentUser.avatar} alt="" width={24} height={24} />
+            <img src={currentUser?.avatar} alt="" width={24} height={24} />
             <span>{currentUser.username}</span>
             {showSubMenu && (
               <div className="submenu">

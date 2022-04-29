@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import PopupCreatePost from './PopupCreatePost';
 
-function CreatePost({ getPostList }) {
+function CreatePost({ getPostList, mode = 'post' }) {
   const currentUser = useSelector((state) => state.user.current);
   const [open, setOpen] = useState(false);
 
@@ -27,7 +27,9 @@ function CreatePost({ getPostList }) {
         <input
           onClick={handleClickOpen}
           type="text"
-          placeholder={`${currentUser.username}, what do you think?`}
+          placeholder={`${currentUser.username}, ${
+            mode === 'rescue' ? 'what help do you need?' : 'what do you think?'
+          }`}
         />
         <div className="icons">
           <i className="fa-solid fa-bars-staggered"></i>
@@ -39,6 +41,7 @@ function CreatePost({ getPostList }) {
         open={open}
         handleClose={handleClose}
         getPostList={getPostList}
+        mode={mode}
       />
     </div>
   );

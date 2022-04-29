@@ -13,6 +13,7 @@ import Shop from '../Shop';
 import Shopping from '../Shopping';
 import GroupOrder from '../GroupOrder';
 import Rescue from '../Rescue';
+import Checkout from '../Checkout';
 
 function HomePage(props) {
   const [loading, setLoading] = useState(true);
@@ -65,6 +66,7 @@ function HomePage(props) {
                   <Route path="/bookmark" element={<Bookmark />} />
                   <Route path="/group-order" element={<GroupOrder />} />
                   <Route path="/rescue" element={<Rescue />} />
+                  <Route path="/checkout/*" element={<Checkout />} />
                 </Routes>
               </div>
             </div>

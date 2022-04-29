@@ -17,9 +17,13 @@ const userSlice = createSlice({
       localStorage.setItem('USER', JSON.stringify(payload.userInfo));
       localStorage.setItem('TOKEN', payload.token);
     },
+    changeAvatar: (state, { payload }) => {
+      state.current.avatar = payload;
+      localStorage.setItem('USER', JSON.stringify(state.current));
+    },
   },
 });
 
 const { actions, reducer } = userSlice;
-export const { logout, login } = actions;
+export const { logout, login, changeAvatar } = actions;
 export default reducer;

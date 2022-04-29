@@ -4,13 +4,14 @@ import OrderList from './OrderList';
 import PopupInvite from '../../Cart/components/PopupInvite';
 import { groupOrderAPI } from '../../../api/groupOrder';
 import { getGroupOrderCart } from '../GroupOrderSlice';
+import { useNavigate } from 'react-router-dom';
 
 function GOitem({ item, cartId }) {
-  console.log(item);
   const [showPopup, setShowPopup] = useState(false);
   const dispatch = useDispatch();
   const currentUser = JSON.parse(localStorage.getItem('USER'));
   const isCartOwner = currentUser._id === item.cartOwner._id;
+  const navigate = useNavigate();
 
   const total = item.info.reduce((acc, cur) => {
     const totalPerPerson = cur.items.reduce(
@@ -92,12 +93,17 @@ function GOitem({ item, cartId }) {
                 : 'btn btn-primary checkout-btn'
             }
             disabled={total === 0}
+            onClick={() => {
+              navigate(`/home-page/checkout/${cartId}`);
+            }}
           >
             <span>Go to checkout: </span>
-            {total.toLocaleString('it-IT', {
-              style: 'currency',
-              currency: 'VND',
-            })}
+            {total
+              .toLocaleString('it-IT', {
+                style: 'currency',
+                currency: 'VND',
+              })
+              .replace('VND', '₫')}
           </button>
         )}
       </div>

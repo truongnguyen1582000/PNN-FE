@@ -30,10 +30,12 @@ function AddedItem({ product, cartId, isItemOwner }) {
         <div>
           <p>{product.product.name}</p>
           <p className="cart-item-price">
-            {product.product?.price.toLocaleString('it-IT', {
-              style: 'currency',
-              currency: 'VND',
-            })}
+            {product.product?.price
+              .toLocaleString('it-IT', {
+                style: 'currency',
+                currency: 'VND',
+              })
+              .replace('VND', '₫')}
           </p>
         </div>
       </div>

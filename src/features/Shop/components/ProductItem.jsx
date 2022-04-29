@@ -91,10 +91,12 @@ function ProductItem({ product, getProductList }) {
             <div>
               <p>{product.name}</p>
               <p>
-                {product.price.toLocaleString('it-IT', {
-                  style: 'currency',
-                  currency: 'VND',
-                })}
+                {product.price
+                  .toLocaleString('it-IT', {
+                    style: 'currency',
+                    currency: 'VND',
+                  })
+                  .replace('VND', '₫')}
               </p>
             </div>
             {/* delete product button */}

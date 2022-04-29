@@ -5,7 +5,8 @@ import { postApi } from '../../../api/post';
 import { useSnackbar } from 'notistack';
 import { useSelector } from 'react-redux';
 
-function PopupCreatePost({ open, handleClose, getPostList }) {
+function PopupCreatePost({ open, handleClose, getPostList, mode }) {
+  console.log(mode);
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   const fileInputRef = useRef();
@@ -35,17 +36,20 @@ function PopupCreatePost({ open, handleClose, getPostList }) {
         await postApi.createPost({
           content: postContent,
           imgUrl: data.url,
+          type: mode === 'post' ? 'Post' : 'Rescue',
         });
       } else {
         setPostContent('');
         await postApi.createPost({
           content: postContent,
+          type: mode === 'post' ? 'Post' : 'Rescue',
         });
       }
 
       handleClose();
-      enqueueSnackbar('Create post successfully', { variant: 'success' });
+      enqueueSnackbar('Create rescue successfully', { variant: 'success' });
       getPostList();
+      setImage(null);
     } catch (error) {
       enqueueSnackbar(error, { variant: 'error' });
     }
@@ -59,7 +63,7 @@ function PopupCreatePost({ open, handleClose, getPostList }) {
     >
       <form onSubmit={handleSubmit} className="create-post__form">
         <div className="create-post__top">
-          <h2>Create Post</h2>
+          <h2>Create {mode === 'rescue' ? 'Rescue' : 'Post'}</h2>
           <i className="fa-solid fa-xmark" onClick={handleClose}></i>
         </div>
         <div className="create-post__center">
@@ -72,7 +76,11 @@ function PopupCreatePost({ open, handleClose, getPostList }) {
           <textarea
             name="post-content"
             rows="4"
-            placeholder="What do you want to share?"
+            placeholder={
+              mode === 'rescue'
+                ? 'What help do you need?'
+                : 'What do you want to share?'
+            }
             value={postContent}
             onChange={(e) => {
               e.preventDefault();

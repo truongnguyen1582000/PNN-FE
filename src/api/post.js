@@ -6,7 +6,7 @@ const createPost = (data) => {
 };
 
 const getAllPost = () => {
-  const url = '/posts';
+  const url = '/posts/Post';
   return axiosClient.get(url);
 };
 
@@ -35,6 +35,16 @@ const getMyPost = () => {
   return axiosClient.get(url);
 };
 
+const getAllRescue = () => {
+  const url = '/posts/Rescue';
+  return axiosClient.get(url);
+};
+
+const setStatus = (postId) => {
+  const url = '/posts/status/' + postId;
+  return axiosClient.put(url);
+};
+
 export const postApi = {
   createPost,
   getAllPost,
@@ -43,4 +53,6 @@ export const postApi = {
   addToBookmark,
   deletePost,
   getMyPost,
+  getAllRescue,
+  setStatus,
 };
