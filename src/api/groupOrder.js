@@ -50,6 +50,12 @@ const leaveGO = (GOCartId) => {
   return axiosClient.delete(url);
 };
 
+const changeShareStatus = (GOCartId) => {
+  console.log(GOCartId);
+  const url = '/group-order/changeShareStatus/' + GOCartId;
+  return axiosClient.put(url);
+};
+
 export const groupOrderAPI = {
   createGO,
   getGO,
@@ -61,4 +67,5 @@ export const groupOrderAPI = {
   addMoreItemToGO,
   getGroupOrderByToken,
   leaveGO,
+  changeShareStatus,
 };

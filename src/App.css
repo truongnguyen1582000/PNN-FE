@@ -1601,3 +1601,12 @@
 .open:hover i {
   color: red;
 }
+
+.change-status-cart {
+  text-transform: none;
+  background-color: red;
+}
+
+.change-status-cart__reshare {
+  background-color: green;
+}

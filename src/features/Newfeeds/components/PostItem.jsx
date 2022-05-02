@@ -80,6 +80,22 @@ function PostItem({ post, getPostList, mode }) {
         )}
 
         <div className="edit-post-button">
+          {mode === 'rescue' && (
+            <div>
+              <button
+                onClick={handleSetStatus}
+                className={
+                  post.isOpen ? 'change-status-btn open' : 'change-status-btn'
+                }
+              >
+                {post.isOpen ? (
+                  <i className="fa-solid fa-circle-xmark"></i>
+                ) : (
+                  <i className="fa-solid fa-arrow-rotate-left"></i>
+                )}
+              </button>
+            </div>
+          )}
           <MoreVertIcon onClick={() => setShowMore(!showMore)} />
           {showMore && (
             <div className="post-option">
@@ -109,22 +125,7 @@ function PostItem({ post, getPostList, mode }) {
           )}
         </div>
       </div>
-      {isPostOwner && (
-        <div>
-          <button
-            onClick={handleSetStatus}
-            className={
-              post.isOpen ? 'change-status-btn open' : 'change-status-btn'
-            }
-          >
-            {post.isOpen ? (
-              <i className="fa-solid fa-circle-xmark"></i>
-            ) : (
-              <i className="fa-solid fa-arrow-rotate-left"></i>
-            )}
-          </button>
-        </div>
-      )}
+
       <div className="post-content">
         <p>{post.content}</p>
         <img src={post.imgUrl} alt="" />

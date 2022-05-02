@@ -5,6 +5,7 @@ import PopupInvite from '../../Cart/components/PopupInvite';
 import { groupOrderAPI } from '../../../api/groupOrder';
 import { getGroupOrderCart } from '../GroupOrderSlice';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 function GOitem({ item, cartId }) {
   const [showPopup, setShowPopup] = useState(false);
@@ -12,6 +13,7 @@ function GOitem({ item, cartId }) {
   const currentUser = JSON.parse(localStorage.getItem('USER'));
   const isCartOwner = currentUser._id === item.cartOwner._id;
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const total = item.info.reduce((acc, cur) => {
     const totalPerPerson = cur.items.reduce(
@@ -20,6 +22,21 @@ function GOitem({ item, cartId }) {
     );
     return acc + totalPerPerson;
   }, 0);
+
+  const handleChangeShareStatus = async () => {
+    await groupOrderAPI.changeShareStatus(item._id);
+    dispatch(getGroupOrderCart());
+
+    if (!item.isShareable) {
+      enqueueSnackbar('Cart able to sharing !', {
+        variant: 'info',
+      });
+    } else {
+      enqueueSnackbar('Cart is stop sharing !', {
+        variant: 'success',
+      });
+    }
+  };
 
   return (
     <div className="go-item box" style={{ width: '100%' }}>
@@ -59,17 +76,37 @@ function GOitem({ item, cartId }) {
         />
         {/* create a button to delete cart */}
         {isCartOwner && (
-          <button
-            className="btn btn-danger delete-go"
-            onClick={async () => {
-              await groupOrderAPI.delelteGO(cartId);
-              dispatch(getGroupOrderCart());
+          <div
+            style={{
+              marginLeft: 'auto',
             }}
           >
-            <i className="fas fa-trash-alt"></i>
-          </button>
+            {item.isShareable ? (
+              <button
+                className="btn invite-friend change-status-cart"
+                onClick={handleChangeShareStatus}
+              >
+                Stop sharing
+              </button>
+            ) : (
+              <button
+                className="btn invite-friend change-status-cart change-status-cart__reshare"
+                onClick={handleChangeShareStatus}
+              >
+                Re-share cart
+              </button>
+            )}
+            <button
+              className="btn btn-danger delete-go"
+              onClick={async () => {
+                await groupOrderAPI.delelteGO(cartId);
+                dispatch(getGroupOrderCart());
+              }}
+            >
+              <i className="fas fa-trash-alt"></i>
+            </button>
+          </div>
         )}
-
         {/* create leave button */}
         {!isCartOwner && (
           <button
