@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { groupOrderAPI } from '../../../api/groupOrder';
 import { getGroupOrderCart } from '../GroupOrderSlice';
+import ConfirmDelete from './ConfirmDelete';
 
 function AddedItem({ product, cartId, isItemOwner }) {
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
 
   const handleIncreaseGOCartItem = async () => {
     await groupOrderAPI.addMoreItemToGO(cartId, product.product._id);
@@ -15,11 +17,6 @@ function AddedItem({ product, cartId, isItemOwner }) {
     await groupOrderAPI.addMoreItemToGO(cartId, product.product._id, {
       number: -1,
     });
-    await dispatch(getGroupOrderCart());
-  };
-
-  const handleDeleteItem = async () => {
-    await groupOrderAPI.deleteItemFromGO(cartId, product.product._id);
     await dispatch(getGroupOrderCart());
   };
 
@@ -43,7 +40,13 @@ function AddedItem({ product, cartId, isItemOwner }) {
         <div className="quantity">
           <button
             className={`btn btn-primary ${!isItemOwner ? 'disabled' : ''}`}
-            onClick={handleDecreaseGOCartItem}
+            onClick={() => {
+              if (product.quantity === 1) {
+                // show popup for confirm
+                return setShow(true);
+              }
+              handleDecreaseGOCartItem();
+            }}
             disabled={!isItemOwner}
           >
             -
@@ -60,13 +63,22 @@ function AddedItem({ product, cartId, isItemOwner }) {
         <div className="delete-cart-item">
           <button
             className={`btn btn-danger ${isItemOwner ? '' : 'disabled'}`}
-            onClick={handleDeleteItem}
+            onClick={() => {
+              setShow(true);
+            }}
             disabled={!isItemOwner}
           >
             <i className="fas fa-trash-alt"></i>
           </button>
         </div>
       </div>
+
+      {show && (
+        <ConfirmDelete
+          closePopup={() => setShow(false)}
+          handleDeleteItem={handleDecreaseGOCartItem}
+        />
+      )}
     </div>
   );
 }

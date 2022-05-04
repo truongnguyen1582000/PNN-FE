@@ -98,7 +98,12 @@ function PostItem({ post, getPostList, mode }) {
           )}
           <MoreVertIcon onClick={() => setShowMore(!showMore)} />
           {showMore && (
-            <div className="post-option">
+            <div
+              className="post-option"
+              style={{
+                right: mode === 'rescue' && '20%',
+              }}
+            >
               {isPostOwner && (
                 <i>
                   <EditIcon
@@ -144,7 +149,7 @@ function PostItem({ post, getPostList, mode }) {
                   and {post.likes?.length > 0 && post.likes?.length} others
                 </span>
               )}
-              liked this post
+              {mode === 'post' ? 'liked this post' : 'pray for this post'}
             </span>
           )}
         </span>
@@ -152,11 +157,17 @@ function PostItem({ post, getPostList, mode }) {
       <div className="post-action">
         <div className="like" onClick={handleLikePost}>
           {isLikedPost ? (
-            <i className="fa-solid fa-heart liked"></i>
-          ) : (
+            mode === 'post' ? (
+              <i className="fa-solid fa-heart liked"></i>
+            ) : (
+              <i class="fa-solid fa-suitcase-medical liked"></i>
+            )
+          ) : mode === 'post' ? (
             <i className="fa-light fa-heart"></i>
+          ) : (
+            <i class="fa-light fa-suitcase-medical"></i>
           )}
-          <p>Like</p>
+          <p>{mode === 'post' ? 'Like' : 'Pray'}</p>
         </div>
         {mode === 'post' && (
           <div className="bookmark-save" onClick={handleSavePost}>
