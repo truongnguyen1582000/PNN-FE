@@ -7,21 +7,8 @@ import Landing from './features/Landing';
 import InvitePage from './features/InvitePage';
 
 function App() {
-  const location = useLocation();
   const currentUser = JSON.parse(localStorage.getItem('USER'));
-  const navigate = useNavigate();
 
-  useEffect(
-    () => {
-      if (currentUser?._id) {
-        navigate('/home-page/newfeed');
-      } else {
-        return navigate('/');
-      }
-    },
-    // eslint-disable-next-line
-    [location.pathname === '/']
-  );
   return (
     <div className="App">
       <Routes>

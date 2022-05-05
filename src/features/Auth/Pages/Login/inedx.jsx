@@ -25,7 +25,7 @@ function Login() {
       const action = login(res);
       dispatch(action);
       enqueueSnackbar('WELLCOME to PPN', { variant: 'success' });
-      navigate('/home-page');
+      navigate('/home-page/newfeed');
     } catch (error) {
       enqueueSnackbar(error, { variant: 'error' });
     }

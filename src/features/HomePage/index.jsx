@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import HomeNavbar from '../../components/HomeNavbar';
 import Loading from '../../components/Loading';
 import Sidebar from '../../components/Sidebar';
@@ -14,31 +14,22 @@ import Shopping from '../Shopping';
 import GroupOrder from '../GroupOrder';
 import Rescue from '../Rescue';
 import Checkout from '../Checkout';
+import { useNavigate } from 'react-router-dom';
 
 function HomePage(props) {
   const [loading, setLoading] = useState(true);
+  const currentUser = JSON.parse(localStorage.getItem('USER'));
   const navigate = useNavigate();
-  const location = useLocation();
-
   useEffect(
     () => {
       setTimeout(() => {
         setLoading(false);
-      }, 1);
-      if (
-        location.pathname === '/home-page/' ||
-        location.pathname === '/home-page'
-      ) {
-        return navigate('/home-page/newfeed');
+      }, 1000);
+      if (!currentUser) {
+        navigate('/');
       }
-      return navigate(location.pathname);
     },
-    // eslint-disable-next-line
-    []
-  );
 
-  useEffect(
-    () => {},
     // eslint-disable-next-line
     []
   );
