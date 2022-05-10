@@ -15,6 +15,9 @@ function PostItem({ post, getPostList, mode }) {
   const isLikedPost = post?.likes?.some((e) => e._id === currentUser._id);
   const isSavePost = post?.bookmark?.some((e) => e === currentUser._id);
   const isPostOwner = post?.author?._id === currentUser._id;
+  const showHehe = mode === 'rescue' && isPostOwner;
+
+  console.log(isPostOwner);
   const [showMore, setShowMore] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const handleLikePost = async () => {
@@ -80,7 +83,7 @@ function PostItem({ post, getPostList, mode }) {
         )}
 
         <div className="edit-post-button">
-          {mode === 'rescue' && (
+          {showHehe && (
             <div>
               <button
                 onClick={handleSetStatus}
@@ -149,7 +152,7 @@ function PostItem({ post, getPostList, mode }) {
                   and {post.likes?.length > 0 && post.likes?.length} others
                 </span>
               )}
-              {mode === 'post' ? 'liked this post' : 'pray for this post'}
+              {mode === 'post' ? ' liked this post' : ' pray for this post'}
             </span>
           )}
         </span>

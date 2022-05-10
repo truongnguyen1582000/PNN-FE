@@ -93,7 +93,7 @@ function GOitem({ item, cartId }) {
                 className="btn invite-friend change-status-cart change-status-cart__reshare"
                 onClick={handleChangeShareStatus}
               >
-                Re-share cart
+                Start share cart
               </button>
             )}
             <button

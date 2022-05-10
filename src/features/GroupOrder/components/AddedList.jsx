@@ -10,20 +10,33 @@ function AddedList({ info, cartId }) {
   return (
     <div>
       {infos.length === 0 && (
-        <div className="cart-empty">
-          <Link to="/home-page/shoping">
-            <i className="fa-solid fa-backpack"></i>
-          </Link>
-          <span>Your group cart is empty</span>
-          <p
-            style={{
-              fontSize: '16px',
-              marginTop: '9px',
-            }}
-          >
-            Let's buy some thing
-          </p>
-        </div>
+        <>
+          {isItemOwner ? (
+            <div className="cart-empty">
+              <Link to="/home-page/shoping">
+                <i className="fa-solid fa-backpack"></i>
+              </Link>
+              <span>Your group cart is empty</span>
+              <p
+                style={{
+                  fontSize: '16px',
+                  marginTop: '9px',
+                }}
+              >
+                Let's buy some thing
+              </p>
+            </div>
+          ) : (
+            <div
+              style={{
+                textAlign: 'center',
+                marginBottom: '20px',
+              }}
+            >
+              {info.addedBy.username}'s cart is empty
+            </div>
+          )}
+        </>
       )}
       {infos.length > 0 && (
         <>

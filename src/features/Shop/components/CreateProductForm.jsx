@@ -161,7 +161,13 @@ function CreateProductForm({ showPopup, getProductList, closePopup }) {
                     }}
                     onClick={() => setImage(null)}
                   ></i>
-                  <img src={preview} alt="" />
+                  <img
+                    src={preview}
+                    alt=""
+                    style={{
+                      height: '100%',
+                    }}
+                  />
                 </div>
               )}
             </div>

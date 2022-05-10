@@ -55,6 +55,15 @@ function Login() {
           Sign Up
         </Link>
       </span>
+      <span
+        style={{
+          marginTop: '8px',
+        }}
+      >
+        <Link to="/auth/forgot-password" className="router-link">
+          Forgot password?
+        </Link>
+      </span>
     </form>
   );
 }

@@ -15,6 +15,7 @@ ReactDOM.render(
         vertical: 'bottom',
         horizontal: 'right',
       }}
+      autoHideDuration={1000}
     >
       <Provider store={store}>
         <App />

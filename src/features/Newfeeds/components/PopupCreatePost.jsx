@@ -47,7 +47,15 @@ function PopupCreatePost({ open, handleClose, getPostList, mode }) {
       }
 
       handleClose();
-      enqueueSnackbar('Create rescue successfully', { variant: 'success' });
+      if (mode === 'rescue') {
+        return enqueueSnackbar('Create rescue successfully', {
+          variant: 'success',
+        });
+      } else {
+        return enqueueSnackbar('Create post successfully', {
+          variant: 'success',
+        });
+      }
       getPostList();
       setImage(null);
     } catch (error) {

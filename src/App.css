@@ -78,6 +78,10 @@
   text-decoration: none;
 }
 
+.router-link:hover {
+  text-decoration: underline;
+}
+
 .register-form {
   position: unset;
   right: unset;
@@ -187,6 +191,7 @@
 }
 
 .user-account img {
+  object-fit: cover;
   border-radius: 50%;
   width: 24px;
   margin-right: 8px;
@@ -403,6 +408,7 @@
 }
 
 .avatar {
+  object-fit: cover;
   border-radius: 50%;
   margin-right: 8px;
 }
@@ -533,6 +539,7 @@
 }
 
 .author img {
+  object-fit: cover;
   border-radius: 50%;
 }
 
@@ -659,7 +666,7 @@
   border-radius: 8px;
   margin: -12px;
   margin-top: 16px;
-  max-height: 245px;
+  max-height: 390px;
   object-fit: contain;
   background-color: #efefef;
 }
@@ -971,6 +978,7 @@
 .cart-item-img {
   display: flex;
   align-items: center;
+  padding-right: 16px;
 }
 
 .cart-item-img img {
@@ -983,6 +991,7 @@
 }
 
 .quantity {
+  display: flex;
   margin-right: 8px;
   height: 34px;
 }
@@ -1287,6 +1296,7 @@
 }
 
 .profile-avatar img {
+  object-fit: cover;
   position: absolute;
   left: 1%;
   top: -100px;
