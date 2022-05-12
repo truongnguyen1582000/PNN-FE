@@ -98,15 +98,6 @@ function Sidebar(props) {
       </li>
       <li>
         <NavLink
-          to="/home-page/knowledge"
-          className={({ isActive }) => (isActive ? 'activeNav' : '')}
-        >
-          <i className="fa-solid fa-book"></i>
-          <span>Knowledge</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
           to="/home-page/bookmark"
           className={({ isActive }) => (isActive ? 'activeNav' : '')}
         >

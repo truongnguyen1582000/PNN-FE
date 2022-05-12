@@ -10,6 +10,7 @@ import pic6 from '../../assets/imgs/pic6.webp';
 import Login from '../Auth/Pages/Login/inedx';
 import { clearCart } from '../Cart/CartSlice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Landing(props) {
   const dispatch = useDispatch();
@@ -20,6 +21,16 @@ function Landing(props) {
     // eslint-disable-next-line
     []
   );
+
+  const currentUser = JSON.parse(localStorage.getItem('USER'));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUser?._id) {
+      navigate('/home-page/newfeed');
+    }
+  }, []);
+
   return (
     <div className="landing">
       <img src={logo} alt="" width={200} className="landing-nav" />

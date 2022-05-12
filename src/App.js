@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Auth from './features/Auth';
 import HomePage from './features/HomePage';
@@ -7,8 +6,6 @@ import Landing from './features/Landing';
 import InvitePage from './features/InvitePage';
 
 function App() {
-  const currentUser = JSON.parse(localStorage.getItem('USER'));
-
   return (
     <div className="App">
       <Routes>

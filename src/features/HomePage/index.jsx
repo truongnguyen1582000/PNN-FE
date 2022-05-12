@@ -7,7 +7,6 @@ import Account from '../Account';
 import Announment from '../Announcement';
 import Bookmark from '../Bookmark';
 import Cart from '../Cart';
-import Knowledge from '../Knowledge';
 import Newfeed from '../Newfeeds';
 import Shop from '../Shop';
 import Shopping from '../Shopping';
@@ -53,7 +52,6 @@ function HomePage(props) {
                   <Route path="/shop" element={<Shop />} />
                   <Route path="/shoping" element={<Shopping />} />
                   <Route path="/cart" element={<Cart />} />
-                  <Route path="/knowledge" element={<Knowledge />} />
                   <Route path="/bookmark" element={<Bookmark />} />
                   <Route path="/group-order" element={<GroupOrder />} />
                   <Route path="/rescue" element={<Rescue />} />
