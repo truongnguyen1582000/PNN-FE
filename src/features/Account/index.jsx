@@ -5,7 +5,7 @@ import { userAPI } from '../../api/auth';
 import { uploadAvatar } from '../../api/cloudinary';
 import { postApi } from '../../api/post';
 import coverImage from '../../assets/imgs/cover.98ab1b0a.webp';
-import { changeAvatar } from '../Auth/authSlice';
+import { changeAvatar, changeName } from '../Auth/authSlice';
 import CreatePost from '../Newfeeds/components/CreatePost';
 import PostList from '../Newfeeds/components/PostList';
 
@@ -16,6 +16,9 @@ function Account(props) {
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   const dispatch = useDispatch();
+  const [showEdit, setShowEdit] = useState(false);
+  const [name, setName] = useState(currentUser.username);
+  const [showPassword, setShowPassword] = useState(true);
 
   const getPostList = async () => {
     try {
@@ -89,14 +92,79 @@ function Account(props) {
           </div>
           <div className="more-info">
             <div>
-              <p className="profile-name">{currentUser.username}</p>
+              <p className="profile-name">
+                {!showEdit ? (
+                  currentUser.username
+                ) : (
+                  <input
+                    value={name}
+                    className="change-name"
+                    onChange={(e) => setName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        userAPI.updateUsername({ username: name });
+                        dispatch(changeName(name));
+                        setShowEdit(false);
+
+                        enqueueSnackbar('Change name success', {
+                          variant: 'success',
+                        });
+
+                        getPostList();
+
+                        setName(e.target.value);
+                      }
+                    }}
+                  />
+                )}
+
+                {!showEdit ? (
+                  <i
+                    className="fas fa-pen edit-name-btn"
+                    onClick={() => setShowEdit(true)}
+                  ></i>
+                ) : (
+                  <i
+                    className="fas fa-check edit-name-btn"
+                    onClick={() => {
+                      userAPI.updateUsername({ username: name });
+                      dispatch(changeName(name));
+                      setShowEdit(false);
+
+                      enqueueSnackbar('Change name success', {
+                        variant: 'success',
+                      });
+
+                      getPostList();
+
+                      setName(name);
+                    }}
+                  ></i>
+                )}
+              </p>
               <span className="quote">
                 Dogs and angels are not very far apart. - Charles Bukowski,
                 German American Writer
               </span>
             </div>
 
-            <button className="btn btn-change-password">Change password</button>
+            <div>
+              <button
+                className="btn btn-change-password"
+                onClick={() => {
+                  setShowPassword(!showPassword);
+                }}
+              >
+                Change password
+              </button>
+              {showPassword && (
+                <div className="change-password">
+                  <input type="password" placeholder="Old password" />
+                  <input type="password" placeholder="New password" />
+                  <input type="password" placeholder="Confirm password" />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

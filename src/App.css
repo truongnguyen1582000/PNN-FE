@@ -1353,6 +1353,7 @@
   height: 34px;
   background-color: rgb(21, 138, 222);
   color: #fff;
+  width: 100%;
 }
 
 .hehe {
@@ -1512,6 +1513,7 @@
 .checkout-item-name,
 .checkout-title span:nth-child(1) {
   width: 400px;
+  padding-right: 16px;
 }
 
 .checkout-item-price,
@@ -1619,4 +1621,28 @@
 
 .change-status-cart__reshare {
   background-color: green;
+}
+
+.edit-name-btn {
+  font-size: 16px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.change-name {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 4px 8px;
+  border-radius: 32px;
+}
+
+.change-password {
+  display: flex;
+  flex-direction: column;
+}
+
+.change-password input {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-top: 8px;
+  padding: 4px 8px;
+  border-radius: 32px;
 }

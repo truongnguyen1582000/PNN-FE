@@ -1,7 +1,7 @@
 import React from 'react';
 import CheckoutItem from './CheckoutItem';
 
-function CheckoutList({ cart }) {
+function CheckoutList({ cart, handleCheckout }) {
   return (
     <div className="box">
       <div className="checkout-title">
@@ -39,7 +39,9 @@ function CheckoutList({ cart }) {
       </div>
 
       <div className="checkout-finish">
-        <button className="btn btn-primary">Checkout</button>
+        <button className="btn btn-primary" onClick={() => handleCheckout()}>
+          Checkout
+        </button>
       </div>
     </div>
   );

@@ -22,6 +22,11 @@ function Checkout(props) {
     setAddressList(data);
   };
 
+  const handleCheckout = () => {
+    console.log(selectedAddress);
+    console.log(checkoutGOcart);
+  };
+
   useEffect(
     () => {
       getAddress();
@@ -83,7 +88,12 @@ function Checkout(props) {
       </div>
       <div className="box">
         {mode === 1 && <CheckoutList cart={cart} />}
-        {mode === 2 && <CheckoutGO checkoutGOcart={checkoutGOcart} />}
+        {mode === 2 && (
+          <CheckoutGO
+            checkoutGOcart={checkoutGOcart}
+            handleCheckout={handleCheckout}
+          />
+        )}
       </div>
     </div>
   );

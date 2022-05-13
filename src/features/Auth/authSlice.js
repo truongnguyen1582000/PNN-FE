@@ -21,9 +21,13 @@ const userSlice = createSlice({
       state.current.avatar = payload;
       localStorage.setItem('USER', JSON.stringify(state.current));
     },
+    changeName: (state, { payload }) => {
+      state.current.username = payload;
+      localStorage.setItem('USER', JSON.stringify(state.current));
+    },
   },
 });
 
 const { actions, reducer } = userSlice;
-export const { logout, login, changeAvatar } = actions;
+export const { logout, login, changeAvatar, changeName } = actions;
 export default reducer;

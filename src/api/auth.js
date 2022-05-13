@@ -15,8 +15,14 @@ const updateAvatar = (data) => {
   return axiosClient.put(url, data);
 };
 
+const updateUsername = (data) => {
+  const url = '/auth/updateUsername';
+  return axiosClient.put(url, data);
+};
+
 export const userAPI = {
   login,
   register,
   updateAvatar,
+  updateUsername,
 };

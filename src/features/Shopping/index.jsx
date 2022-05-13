@@ -10,9 +10,7 @@ function Shopping(props) {
     try {
       const { data } = await productApi.getProductList();
       setProductList(data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

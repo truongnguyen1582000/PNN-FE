@@ -1,8 +1,6 @@
 import React from 'react';
 
-function CheckoutGO({ checkoutGOcart }) {
-  console.log('======================================');
-  console.log(checkoutGOcart);
+function CheckoutGO({ checkoutGOcart, handleCheckout }) {
   return (
     <div>
       <div className="checkout-title">
@@ -71,7 +69,9 @@ function CheckoutGO({ checkoutGOcart }) {
       </div>
 
       <div className="checkout-finish">
-        <button className="btn btn-primary">Checkout</button>
+        <button className="btn btn-primary" onClick={handleCheckout}>
+          Checkout
+        </button>
       </div>
     </div>
   );
