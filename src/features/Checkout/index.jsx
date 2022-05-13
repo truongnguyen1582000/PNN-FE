@@ -34,7 +34,6 @@ function Checkout(props) {
 
       if (location.pathname.split('/').pop() !== 'checkout') {
         setMode(2);
-        console.log(GOcart);
         setCheckoutGOcart(
           GOcart[
             GOcart.findIndex(
@@ -45,8 +44,6 @@ function Checkout(props) {
           ]
         );
       }
-
-      console.log(mode);
     },
     // eslint-disable-next-line
     []

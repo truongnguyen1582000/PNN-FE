@@ -11,9 +11,7 @@ function Shop(props) {
     try {
       const { data } = await productApi.getMyProduct();
       setProductList(data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

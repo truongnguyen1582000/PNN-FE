@@ -6,7 +6,6 @@ import { useSnackbar } from 'notistack';
 import { useSelector } from 'react-redux';
 
 function PopupCreatePost({ open, handleClose, getPostList, mode }) {
-  console.log(mode);
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   const fileInputRef = useRef();

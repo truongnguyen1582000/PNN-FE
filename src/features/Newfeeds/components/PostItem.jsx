@@ -17,7 +17,6 @@ function PostItem({ post, getPostList, mode }) {
   const isPostOwner = post?.author?._id === currentUser._id;
   const showHehe = mode === 'rescue' && isPostOwner;
 
-  console.log(isPostOwner);
   const [showMore, setShowMore] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const handleLikePost = async () => {

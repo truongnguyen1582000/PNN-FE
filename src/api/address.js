@@ -1,7 +1,6 @@
 import axiosClient from './axiosClient';
 
 const createAddress = (data) => {
-  console.log(data);
   const url = '/address/create';
   return axiosClient.post(url, data);
 };

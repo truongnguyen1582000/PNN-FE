@@ -12,7 +12,6 @@ function InvitePage(props) {
   const getGO = async () => {
     try {
       const res = await groupOrderAPI.getGroupOrderByToken(token);
-      console.log(res);
       if (res.message) {
         enqueueSnackbar(res.message, { variant: 'info' });
       }

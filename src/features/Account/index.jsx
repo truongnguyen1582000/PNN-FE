@@ -23,7 +23,6 @@ function Account(props) {
   const getPostList = async () => {
     try {
       const { data } = await postApi.getMyPost();
-      console.log(data);
 
       setPostList(data);
     } catch (error) {

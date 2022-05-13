@@ -43,7 +43,6 @@ function AddressForm({ closePop, getAddress }) {
       closePop();
       getAddress();
     } catch (error) {
-      console.log({ error });
       enqueueSnackbar(error, { variant: 'error' });
     }
   };

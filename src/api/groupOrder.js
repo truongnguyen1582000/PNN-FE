@@ -51,7 +51,7 @@ const leaveGO = (GOCartId) => {
 };
 
 const changeShareStatus = (GOCartId) => {
-  console.log(GOCartId);
+  GOCartId;
   const url = '/group-order/changeShareStatus/' + GOCartId;
   return axiosClient.put(url);
 };

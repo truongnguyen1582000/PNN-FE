@@ -76,7 +76,7 @@ function ProductItem({ product, getProductList }) {
       });
       await getCartData();
     } catch (error) {
-      console.log(error);
+      error;
       enqueueSnackbar('Group order cart is closed', {
         variant: 'error',
       });
