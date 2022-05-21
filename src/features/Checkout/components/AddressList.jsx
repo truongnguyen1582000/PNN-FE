@@ -2,7 +2,12 @@ import { useSnackbar } from 'notistack';
 import React from 'react';
 import { addressAPI } from '../../../api/address';
 
-function AddressList({ info, selectAddress, getAddress }) {
+function AddressList({
+  info,
+  selectedAddress,
+  getAddress,
+  handleChangeAddress,
+}) {
   const { enqueueSnackbar } = useSnackbar();
   const isEmptyAddress =
     info?.addressList === undefined || info?.addressList.length === 0;
@@ -25,10 +30,15 @@ function AddressList({ info, selectAddress, getAddress }) {
               key={index}
               className="kk"
               onClick={() => {
-                selectAddress(index);
+                handleChangeAddress(index);
               }}
             >
-              <input type="radio" id={index} name="address" />
+              <input
+                type="radio"
+                id={index}
+                name="address"
+                checked={selectedAddress === index}
+              />
               <label htmlFor={index}>
                 <span className="fwb">
                   <span>{address.name}</span>

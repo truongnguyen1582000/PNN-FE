@@ -18,7 +18,7 @@ function Account(props) {
   const dispatch = useDispatch();
   const [showEdit, setShowEdit] = useState(false);
   const [name, setName] = useState(currentUser.username);
-  const [showPassword, setShowPassword] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const getPostList = async () => {
     try {

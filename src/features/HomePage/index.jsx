@@ -13,6 +13,7 @@ import Shopping from '../Shopping';
 import GroupOrder from '../GroupOrder';
 import Rescue from '../Rescue';
 import Checkout from '../Checkout';
+import Order from '../Order';
 import { useNavigate } from 'react-router-dom';
 
 function HomePage(props) {
@@ -56,6 +57,7 @@ function HomePage(props) {
                   <Route path="/group-order" element={<GroupOrder />} />
                   <Route path="/rescue" element={<Rescue />} />
                   <Route path="/checkout/*" element={<Checkout />} />
+                  <Route path="/my-order/" element={<Order />} />
                 </Routes>
               </div>
             </div>

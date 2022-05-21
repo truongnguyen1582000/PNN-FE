@@ -35,10 +35,10 @@ function HomeNavbar(props) {
           />
         </div>
         <div className="navbar-end">
-          <div className="notification">
+          {/* <div className="notification">
             <i className="fa-solid fa-bell"></i>
             <div className="count">1</div>
-          </div>
+          </div> */}
           <div
             className="user-account"
             onClick={() => setShowSubMenu(!showSubMenu)}

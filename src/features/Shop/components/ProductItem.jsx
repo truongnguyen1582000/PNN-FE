@@ -6,6 +6,7 @@ import { getCart } from '../../Cart/CartSlice';
 import PopupChooseCart from '../../Shopping/components/PopupChooseCart';
 import { groupOrderAPI } from '../../../api/groupOrder';
 import { productApi } from '../../../api/product';
+import EditProductForm from './EditProductForm';
 
 function ProductItem({ product, getProductList }) {
   const currentUser = JSON.parse(localStorage.getItem('USER'));
@@ -14,6 +15,7 @@ function ProductItem({ product, getProductList }) {
   const dispatch = useDispatch();
   const GOcart = useSelector((state) => state.GOcart);
   const [showPopup, setShowPopup] = useState(false);
+  const [showPopup2, setShowPopup2] = useState(false);
 
   const getCartData = async () => {
     await dispatch(getCart());
@@ -76,7 +78,6 @@ function ProductItem({ product, getProductList }) {
       });
       await getCartData();
     } catch (error) {
-      error;
       enqueueSnackbar('Group order cart is closed', {
         variant: 'error',
       });
@@ -89,7 +90,11 @@ function ProductItem({ product, getProductList }) {
         <div className="product-item box">
           <img src={product.image} alt="" />
           <div className="bottom">
-            <div>
+            <div
+              style={{
+                width: '100%',
+              }}
+            >
               <p>{product.name}</p>
               <p>
                 {product.price
@@ -101,29 +106,45 @@ function ProductItem({ product, getProductList }) {
               </p>
             </div>
             {/* delete product button */}
-            {isMyProduct && (
-              <button
-                className="btn btn-danger delete-product"
-                style={{
-                  height: '30px',
-                }}
-                onClick={async () => {
-                  try {
-                    await productApi.deleteProduct(product._id);
-                    enqueueSnackbar('Delete product successfully', {
-                      variant: 'success',
-                    });
-                    await getProductList();
-                  } catch (error) {
-                    enqueueSnackbar(error.message, {
-                      variant: 'error',
-                    });
-                  }
-                }}
-              >
-                <i className="fa-solid fa-trash-alt"></i>
-              </button>
-            )}
+            <div>
+              {isMyProduct && (
+                <button
+                  className="btn btn-danger delete-product edit-product"
+                  style={{
+                    height: '30px',
+                    marginRight: '8px',
+                  }}
+                  onClick={async () => {
+                    setShowPopup2(true);
+                  }}
+                >
+                  <i className="fa-solid fa-pen"></i>
+                </button>
+              )}
+              {isMyProduct && (
+                <button
+                  className="btn btn-danger delete-product"
+                  style={{
+                    height: '30px',
+                  }}
+                  onClick={async () => {
+                    try {
+                      await productApi.deleteProduct(product._id);
+                      enqueueSnackbar('Delete product successfully', {
+                        variant: 'success',
+                      });
+                      await getProductList();
+                    } catch (error) {
+                      enqueueSnackbar(error.message, {
+                        variant: 'error',
+                      });
+                    }
+                  }}
+                >
+                  <i className="fa-solid fa-trash-alt"></i>
+                </button>
+              )}
+            </div>
           </div>
 
           {!isMyProduct && (
@@ -138,6 +159,12 @@ function ProductItem({ product, getProductList }) {
               handleAddToGroupCart={handleAddToGroupCart}
             />
           )}
+          <EditProductForm
+            getProductList={getProductList}
+            showPopup={showPopup2}
+            closePopup={() => setShowPopup2(false)}
+            productInfos={product}
+          />
         </div>
       )}
     </div>

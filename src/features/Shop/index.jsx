@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { productApi } from '../../api/product';
 import CreateProductForm from './components/CreateProductForm';
 import ProductList from './components/ProductList';
+import OrderForShop from './components/OrderForShop';
 
 function Shop(props) {
   const [productList, setProductList] = useState([]);
@@ -19,23 +20,31 @@ function Shop(props) {
   }, []);
 
   return (
-    <div className="box large-size">
-      <button
-        className="btn invite-friend create-product-btn"
-        onClick={() => setShowPopup(true)}
-      >
-        <i className="fas fa-plus-circle"></i>
-        <span>Create Product</span>
-      </button>
+    <>
+      <div className="box large-size">
+        <button
+          className="btn invite-friend create-product-btn"
+          onClick={() => setShowPopup(true)}
+        >
+          <i className="fas fa-plus-circle"></i>
+          <span>Create Product</span>
+        </button>
 
-      <CreateProductForm
-        getProductList={getProductList}
-        showPopup={showPopup}
-        closePopup={() => setShowPopup(false)}
-      />
+        <CreateProductForm
+          getProductList={getProductList}
+          showPopup={showPopup}
+          closePopup={() => setShowPopup(false)}
+        />
 
-      <ProductList productList={productList} getProductList={getProductList} />
-    </div>
+        <ProductList
+          productList={productList}
+          getProductList={getProductList}
+        />
+      </div>
+      <div className="box large-size">
+        <OrderForShop />
+      </div>
+    </>
   );
 }
 

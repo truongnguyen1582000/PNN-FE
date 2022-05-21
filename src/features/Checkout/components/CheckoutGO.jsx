@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function CheckoutGO({ checkoutGOcart, handleCheckout }) {
+function CheckoutGO({ checkoutGOcart, handleCheckoutGO }) {
+  const [message, setMessage] = useState('');
   return (
     <div>
       <div className="checkout-title">
@@ -41,7 +42,13 @@ function CheckoutGO({ checkoutGOcart, handleCheckout }) {
       <div className="checkout-bottom">
         <div className="message-for-shop">
           <label htmlFor="message">Message: </label>
-          <input type="text" id="message" placeholder="Note to seller." />
+          <input
+            type="text"
+            id="message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Note to seller."
+          />
         </div>
         <span>
           <span
@@ -69,7 +76,13 @@ function CheckoutGO({ checkoutGOcart, handleCheckout }) {
       </div>
 
       <div className="checkout-finish">
-        <button className="btn btn-primary" onClick={handleCheckout}>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            handleCheckoutGO(message);
+            setMessage('');
+          }}
+        >
           Checkout
         </button>
       </div>

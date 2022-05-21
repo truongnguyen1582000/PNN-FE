@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { addressAPI } from '../../api/address';
 import AddressForm from './components/AddressForm';
 import AddressList from './components/AddressList';
 import CheckoutList from './components/CheckoutList';
 import CheckoutGO from './components/CheckoutGO';
+import { useSnackbar } from 'notistack';
+import { orderApi } from '../../api/order';
 
 function Checkout(props) {
   const [addressList, setAddressList] = useState([]);
@@ -16,21 +18,51 @@ function Checkout(props) {
   const [mode, setMode] = useState(1);
   const GOcart = JSON.parse(localStorage.getItem('GOcart'));
   const [checkoutGOcart, setCheckoutGOcart] = useState([]);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const getAddress = async () => {
     const { data } = await addressAPI.getAddress();
     setAddressList(data);
   };
 
-  const handleCheckout = () => {
-    console.log(selectedAddress);
-    console.log(checkoutGOcart);
+  const handleCheckoutMyCart = () => {
+    console.log(addressList.addressList[selectedAddress]);
+    console.log(cart);
+  };
+
+  const handleCheckoutGO = async (message) => {
+    const result = checkoutGOcart.info
+      .map((e) => e.items)
+      .reduce((acc, cur) => acc.concat(cur), []);
+    const to = result[0].product.shopOwner;
+
+    try {
+      const res = await orderApi.createOrder({
+        address: addressList.addressList[selectedAddress],
+        to,
+        orderInfo: result,
+        message,
+        cart: location.pathname.split('/').pop().toString(),
+      });
+
+      enqueueSnackbar('Order created successfully', {
+        variant: 'success',
+      });
+
+      // redirect to /my-order
+      navigate('/home-page/my-order');
+    } catch (error) {
+      enqueueSnackbar(error.message, {
+        variant: 'error',
+      });
+    }
   };
 
   useEffect(
     () => {
       getAddress();
-      setSelectedAddress(addressList[0]);
+      setSelectedAddress(0);
 
       if (location.pathname.split('/').pop() !== 'checkout') {
         setMode(2);
@@ -76,19 +108,21 @@ function Checkout(props) {
 
             <AddressList
               info={addressList}
-              selectAddress={(index) => setSelectedAddress(addressList[index])}
-              getAddress={getAddress}
               selectedAddress={selectedAddress}
+              getAddress={getAddress}
+              handleChangeAddress={(index) => setSelectedAddress(index)}
             />
           </div>
         </div>
       </div>
       <div className="box">
-        {mode === 1 && <CheckoutList cart={cart} />}
+        {mode === 1 && (
+          <CheckoutList cart={cart} handleCheckout={handleCheckoutMyCart} />
+        )}
         {mode === 2 && (
           <CheckoutGO
             checkoutGOcart={checkoutGOcart}
-            handleCheckout={handleCheckout}
+            handleCheckoutGO={handleCheckoutGO}
           />
         )}
       </div>
