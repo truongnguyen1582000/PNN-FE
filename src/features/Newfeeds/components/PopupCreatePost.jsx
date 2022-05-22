@@ -46,6 +46,8 @@ function PopupCreatePost({ open, handleClose, getPostList, mode }) {
       }
 
       handleClose();
+      getPostList();
+      setImage(null);
       if (mode === 'rescue') {
         return enqueueSnackbar('Create rescue successfully', {
           variant: 'success',
@@ -55,8 +57,6 @@ function PopupCreatePost({ open, handleClose, getPostList, mode }) {
           variant: 'success',
         });
       }
-      getPostList();
-      setImage(null);
     } catch (error) {
       enqueueSnackbar(error, { variant: 'error' });
     }

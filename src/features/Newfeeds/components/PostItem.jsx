@@ -9,6 +9,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FlagIcon from '@mui/icons-material/Flag';
+import { useNavigate } from 'react-router-dom';
 
 function PostItem({ post, getPostList, mode }) {
   const currentUser = useSelector((state) => state.user.current);
@@ -16,6 +17,7 @@ function PostItem({ post, getPostList, mode }) {
   const isSavePost = post?.bookmark?.some((e) => e === currentUser._id);
   const isPostOwner = post?.author?._id === currentUser._id;
   const showHehe = mode === 'rescue' && isPostOwner;
+  const navigate = useNavigate();
 
   const [showMore, setShowMore] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -56,10 +58,18 @@ function PostItem({ post, getPostList, mode }) {
     }
   };
 
+  const handleSeeDetailProfile = () => {
+    if (post.author._id === currentUser._id) {
+      navigate('/home-page/account');
+    } else {
+      navigate(`/home-page/profile/${post.author._id}`);
+    }
+  };
+
   return (
     <div className="post-item box">
       <div className="create-post__center">
-        <div className="author post-author">
+        <div className="author post-author" onClick={handleSeeDetailProfile}>
           <img src={post.author?.avatar} alt="" height={40} width={40} />
           <div className="name-and-time">
             <p className="name">{post.author?.username}</p>

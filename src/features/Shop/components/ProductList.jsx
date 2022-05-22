@@ -5,23 +5,25 @@ function ProductList({ productList, getProductList, handleSort, currentSort }) {
   const currentUser = JSON.parse(localStorage.getItem('USER'));
   return (
     <>
-      <div className="sort-product">
-        <button
-          onClick={() => {
-            handleSort();
-          }}
-          className="btn sort-btn"
-        >
-          {currentSort === -1
-            ? 'Sort by: Price: Low to High'
-            : 'Sort by Price: High to Low'}
-          {currentSort === -1 ? (
-            <i className="fas fa-sort-amount-up" />
-          ) : (
-            <i className="fas fa-sort-amount-down" />
-          )}
-        </button>
-      </div>
+      {productList.length > 0 && (
+        <div className="sort-product">
+          <button
+            onClick={() => {
+              handleSort();
+            }}
+            className="btn sort-btn"
+          >
+            {currentSort === -1
+              ? 'Sort by: Price: Low to High'
+              : 'Sort by Price: High to Low'}
+            {currentSort === -1 ? (
+              <i className="fas fa-sort-amount-up" />
+            ) : (
+              <i className="fas fa-sort-amount-down" />
+            )}
+          </button>
+        </div>
+      )}
 
       {productList.length > 0 ? (
         <div className="product-list">
@@ -35,7 +37,7 @@ function ProductList({ productList, getProductList, handleSort, currentSort }) {
         </div>
       ) : (
         <div
-          className="text-center box"
+          className="text-center "
           style={{
             marginTop: '20px',
           }}
@@ -45,7 +47,7 @@ function ProductList({ productList, getProductList, handleSort, currentSort }) {
               textAlign: 'center',
             }}
           >
-            Do you want to sell something ! Let's add new product,{' '}
+            Do you want to sell something ? Let's add new product !{' '}
             {currentUser.username}
           </h3>
         </div>

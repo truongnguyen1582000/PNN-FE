@@ -26,10 +26,7 @@ function Checkout(props) {
     setAddressList(data);
   };
 
-  const handleCheckoutMyCart = () => {
-    console.log(addressList.addressList[selectedAddress]);
-    console.log(cart);
-  };
+  const handleCheckoutMyCart = () => {};
 
   const handleCheckoutGO = async (message) => {
     const result = checkoutGOcart.info
@@ -38,7 +35,7 @@ function Checkout(props) {
     const to = result[0].product.shopOwner;
 
     try {
-      const res = await orderApi.createOrder({
+      await orderApi.createOrder({
         address: addressList.addressList[selectedAddress],
         to,
         orderInfo: result,

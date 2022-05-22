@@ -11,24 +11,26 @@ function Order(props) {
     try {
       const { data } = await orderApi.getMyOrder();
       setOrderList([...data]);
-      console.log(data);
     } catch (error) {
       enqueueSnackbar(error, { variant: 'error' });
     }
   };
 
-  useEffect(() => {
-    getMyOrder();
-
-    interval.current = setInterval(() => {
+  useEffect(
+    () => {
       getMyOrder();
-    }, 2000);
 
-    return () => {
-      clearInterval(interval.current);
-      console.log('clear 2');
-    };
-  }, []);
+      interval.current = setInterval(() => {
+        getMyOrder();
+      }, 2000);
+
+      return () => {
+        clearInterval(interval.current);
+      };
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <div className="box large-size">

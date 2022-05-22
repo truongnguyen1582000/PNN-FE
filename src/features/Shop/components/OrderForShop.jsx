@@ -16,18 +16,21 @@ function OrderForShop(props) {
     }
   };
 
-  useEffect(() => {
-    getShopOrder();
-
-    interval.current = setInterval(() => {
+  useEffect(
+    () => {
       getShopOrder();
-    }, 2000);
 
-    return () => {
-      clearInterval(interval.current);
-      console.log('clear 1');
-    };
-  }, []);
+      interval.current = setInterval(() => {
+        getShopOrder();
+      }, 2000);
+
+      return () => {
+        clearInterval(interval.current);
+      };
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <div>
@@ -47,7 +50,7 @@ function OrderForShop(props) {
               textAlign: 'center',
             }}
           >
-            No order !
+            You have no order !
           </p>
         </div>
       )}

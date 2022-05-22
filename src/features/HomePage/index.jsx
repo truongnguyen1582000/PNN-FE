@@ -14,6 +14,7 @@ import GroupOrder from '../GroupOrder';
 import Rescue from '../Rescue';
 import Checkout from '../Checkout';
 import Order from '../Order';
+import Profile from '../Profile';
 import { useNavigate } from 'react-router-dom';
 
 function HomePage(props) {
@@ -49,6 +50,7 @@ function HomePage(props) {
                 <Routes>
                   <Route path="/newfeed" element={<Newfeed />} />
                   <Route path="/account" element={<Account />} />
+                  <Route path="/profile/*" element={<Profile />} />
                   <Route path="/announcement" element={<Announment />} />
                   <Route path="/shop" element={<Shop />} />
                   <Route path="/shoping" element={<Shopping />} />

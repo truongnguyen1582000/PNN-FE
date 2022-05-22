@@ -10,7 +10,13 @@ const addToBookmark = (postId) => {
   return axiosClient.put(url);
 };
 
+const getUserInfo = (id) => {
+  const url = '/users/' + id;
+  return axiosClient.get(url);
+};
+
 export const bookmarkAPI = {
   getAll,
   addToBookmark,
+  getUserInfo,
 };

@@ -1,20 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { uploadAvatar } from '../../../api/cloudinary';
-import { productApi } from '../../../api/product';
-import { useSnackbar } from 'notistack';
 
-function CreateProductForm({
-  productInfos,
-  showPopup,
-  getProductList,
-  closePopup,
-}) {
-  console.log(productInfos);
+function CreateProductForm({ productInfos, showPopup, closePopup }) {
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   const fileInputRef = useRef();
-
-  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (image) {

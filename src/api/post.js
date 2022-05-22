@@ -35,6 +35,11 @@ const getMyPost = () => {
   return axiosClient.get(url);
 };
 
+const getPostOfUser = (id) => {
+  const url = '/posts/user/' + id;
+  return axiosClient.get(url);
+};
+
 const getAllRescue = () => {
   const url = '/posts/Rescue';
   return axiosClient.get(url);
@@ -55,4 +60,5 @@ export const postApi = {
   getMyPost,
   getAllRescue,
   setStatus,
+  getPostOfUser,
 };

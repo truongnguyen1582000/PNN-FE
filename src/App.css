@@ -627,6 +627,7 @@
 .post-author {
   padding: 0;
   padding: 8px 20px;
+  cursor: pointer;
 }
 
 .post-author img {
@@ -795,6 +796,7 @@
 .comment-item img {
   border-radius: 50%;
   margin-right: 8px;
+  cursor: pointer;
 }
 
 .comment-content {
@@ -809,6 +811,8 @@
   color: #ffa000;
   font-weight: 600;
   margin-right: 8px;
+  cursor: pointer;
+  min-width: fit-content;
 }
 
 .disable {
@@ -982,7 +986,7 @@
 }
 
 .cart-item:not(:last-child) {
-  border-bottom: 1px solid #ffb013;
+  border-bottom: 1px solid #ffb01338;
   padding-bottom: 20px;
   margin-bottom: 16px;
 }
@@ -1212,7 +1216,7 @@
 .go-item-inner {
   margin-top: 8px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .go-item:first-child {
@@ -1661,7 +1665,11 @@
 }
 
 .delete-product {
-  background-color: red;
+  background-color: unset;
+}
+
+.delete-product i {
+  color: red;
 }
 
 .edit-product {
