@@ -22,9 +22,7 @@ function AddedItem({ product, cartId, isItemOwner }) {
   };
 
   const handleDecreaseGOCartItem = async () => {
-    await groupOrderAPI.addMoreItemToGO(cartId, product.product._id, {
-      number: -1,
-    });
+    await groupOrderAPI.deleteItemFromGO(cartId, product.product._id);
     await dispatch(getGroupOrderCart());
   };
 
