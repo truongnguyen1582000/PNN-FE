@@ -1282,9 +1282,7 @@
   display: block;
   width: 200px;
   margin: 0;
-  margin-left: auto;
   background-color: rgb(1, 161, 1);
-  margin-bottom: 8px;
 }
 
 .image-preview {
@@ -1673,7 +1671,11 @@
 }
 
 .edit-product {
-  background-color: #1379ff;
+  background-color: unset;
+}
+
+.edit-product i {
+  color: green;
 }
 
 .edit-product:hover i {
@@ -1710,6 +1712,7 @@
 .total-mon {
   display: flex;
   justify-content: space-between;
+  margin-top: 16px;
 }
 
 .hey {
@@ -1775,4 +1778,23 @@
 
 .sort-btn i {
   margin-left: 4px;
+}
+
+.message {
+  margin-top: 16px;
+  border-top: 1px solid #cdcdcd;
+  padding-top: 8px;
+}
+
+.total-mon select option {
+  font-size: 14px;
+
+  border: 1px solid #cdcdcd;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  margin-bottom: 8px;
+
+  width: 100%;
 }

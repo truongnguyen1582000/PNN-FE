@@ -70,7 +70,21 @@ function Order(props) {
                   >
                     Status:{' '}
                   </span>
-                  <span className="fwb fwba">
+                  <span
+                    className="fwb fwba"
+                    style={{
+                      color:
+                        item.status === 'pending'
+                          ? '#9EA7AD'
+                          : item.status === 'processing'
+                          ? '#2DCCFF'
+                          : item.status === 'completed'
+                          ? 'green'
+                          : item.status === 'cancelled'
+                          ? '#FF3838'
+                          : '#FFB302',
+                    }}
+                  >
                     {item.status === 'pending' && 'Pending'}
                     {item.status === 'processing' && 'Processing'}
                     {item.status === 'shipping' && 'Shipping'}
@@ -112,7 +126,35 @@ function Order(props) {
                 </div>
               ))}
               <div className="total-mon">
-                <div className="btn-cancel-order">Cancel order</div>
+                <button
+                  className="btn-cancel-order"
+                  disabled={
+                    item.status === 'completed' ||
+                    item.status === 'cancelled' ||
+                    item.status === 'shipping'
+                  }
+                  style={{
+                    backgroundColor:
+                      item.status === 'completed' ||
+                      item.status === 'cancelled' ||
+                      item.status === 'shipping'
+                        ? '#9EA7AD'
+                        : '#FF3838',
+                  }}
+                  onClick={async () => {
+                    try {
+                      await orderApi.deleteOrder(item._id);
+                      enqueueSnackbar('Cancel order successfully', {
+                        variant: 'success',
+                      });
+                      getMyOrder();
+                    } catch (error) {
+                      enqueueSnackbar(error, { variant: 'error' });
+                    }
+                  }}
+                >
+                  Cancel order
+                </button>
                 <span>
                   <span
                     style={{

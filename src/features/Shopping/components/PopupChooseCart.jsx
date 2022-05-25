@@ -7,7 +7,8 @@ function PopupChooseCart({
   handleAddToGroupCart,
 }) {
   const [cart, setCart] = useState();
-  const GOcart = useSelector((state) => state.GOcart);
+  const x = useSelector((state) => state.GOcart);
+  const GOcart = x;
 
   const handleAddToGO = async () => {
     handleAddToGroupCart(cart);

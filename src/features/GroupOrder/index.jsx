@@ -1,5 +1,5 @@
 import { useSnackbar } from 'notistack';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { groupOrderAPI } from '../../api/groupOrder';
 import GOList from './components/GOList';
@@ -10,6 +10,7 @@ function GroupOrder(props) {
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
   const groupOrder = useSelector((state) => state.GOcart);
+  const interval = useRef();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -19,9 +20,13 @@ function GroupOrder(props) {
 
   useEffect(
     () => {
-      // setInterval(() => {
       handleGetGroupOrder();
-      // }, 3000);
+
+      interval.current = setInterval(() => {
+        handleGetGroupOrder();
+      }, 2000);
+
+      return () => clearInterval(interval);
     },
     // eslint-disable-next-line
     []

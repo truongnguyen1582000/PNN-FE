@@ -1,6 +1,6 @@
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { userAPI } from '../../api/auth';
 import { uploadAvatar } from '../../api/cloudinary';
@@ -12,9 +12,8 @@ import CreatePost from '../Newfeeds/components/CreatePost';
 import PostList from '../Newfeeds/components/PostList';
 
 function Account({ mode = 1 }) {
-  const [currentUser, setcurrentUser] = useState(
-    JSON.parse(localStorage.getItem('USER'))
-  );
+  const user = useSelector((state) => state.user);
+  const [currentUser, setcurrentUser] = useState(user.current);
   const [postList, setPostList] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const [image, setImage] = useState();
@@ -29,6 +28,7 @@ function Account({ mode = 1 }) {
     confirmPassword: '',
   });
   const location = useLocation();
+  console.log(user);
 
   const getPostList = async () => {
     try {

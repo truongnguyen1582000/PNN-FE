@@ -15,8 +15,20 @@ const getShopOrder = () => {
   return axiosClient.get(url);
 };
 
+const changeStatus = (id, status) => {
+  const url = `/order/${id}`;
+  return axiosClient.put(url, { status });
+};
+
+const deleteOrder = (id) => {
+  const url = `/order/${id}`;
+  return axiosClient.delete(url);
+};
+
 export const orderApi = {
   createOrder,
   getMyOrder,
   getShopOrder,
+  changeStatus,
+  deleteOrder,
 };

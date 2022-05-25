@@ -149,7 +149,7 @@ function PostItem({ post, getPostList, mode }) {
       </div>
       <div className="post-action">
         <span>
-          {post.likes?.length > 0 && (
+          {post?.likes?.length > 0 && (
             <span className="like-count">
               {post.likes
                 ?.splice(0, post.likes.length > 2 ? 2 : post.likes.length)

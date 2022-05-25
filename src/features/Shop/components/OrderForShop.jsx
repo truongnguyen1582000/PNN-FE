@@ -57,7 +57,7 @@ function OrderForShop(props) {
       <div className="box-body">
         {orderList.map((item, index) => {
           return (
-            <div className="hey">
+            <div className="hey" key={index}>
               <div className="info-top">
                 <div className="address">
                   <span
@@ -68,7 +68,7 @@ function OrderForShop(props) {
                     Address:{' '}
                   </span>
                   <span className="">
-                    <span>{item.address.name}</span>
+                    <span>{item.address.name} </span>
                     {/* replace first number  = +84 */}
                     <span>{item.address.phone.replace(/^0+/, '(+84) ')}</span>
                   </span>
@@ -82,7 +82,21 @@ function OrderForShop(props) {
                   >
                     Status:{' '}
                   </span>
-                  <span className="fwb fwba">
+                  <span
+                    className="fwb fwba"
+                    style={{
+                      color:
+                        item.status === 'pending'
+                          ? '#9EA7AD'
+                          : item.status === 'processing'
+                          ? '#2DCCFF'
+                          : item.status === 'completed'
+                          ? 'green'
+                          : item.status === 'cancelled'
+                          ? '#FF3838'
+                          : '#FFB302',
+                    }}
+                  >
                     {item.status === 'pending' && 'Pending'}
                     {item.status === 'processing' && 'Processing'}
                     {item.status === 'shipping' && 'Shipping'}
@@ -123,22 +137,26 @@ function OrderForShop(props) {
                   </div>
                 </div>
               ))}
+              <div className="message">
+                <span>Message: </span>
+                <span>
+                  {item.message.trim().length === 0 ? 'None' : item.message}
+                </span>
+              </div>
               <div className="total-mon">
                 <select
                   id="cars"
                   name="status"
                   className="select"
-                  onChange={(e) => {
-                    orderApi.changeStatus(item._id, e.target.value).then(() => {
-                      getShopOrder();
-                    });
+                  onChange={async (e) => {
+                    await orderApi.changeStatus(item._id, e.target.value);
+                    getShopOrder();
                   }}
+                  value={item.status}
                 >
                   <option value="pending">Pending</option>
                   <option value="processing">Processing</option>
-                  <option value="shipping" selected>
-                    Shipping
-                  </option>
+                  <option value="shipping">Shipping</option>
                   <option value="completed">Completed</option>
                   <option value="cancelled">Cancelled</option>
                 </select>
