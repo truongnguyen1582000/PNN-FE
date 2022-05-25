@@ -85,7 +85,7 @@ function PostItem({ post, getPostList, mode }) {
             ) : (
               <div className="not-rescued">
                 <span>Finding help</span>
-                <i class="fa-solid fa-hand-heart"></i>
+                <i className="fa-solid fa-hand-heart"></i>
               </div>
             )}
           </div>
@@ -172,12 +172,12 @@ function PostItem({ post, getPostList, mode }) {
             mode === 'post' ? (
               <i className="fa-solid fa-heart liked"></i>
             ) : (
-              <i class="fa-solid fa-suitcase-medical liked"></i>
+              <i className="fa-solid fa-suitcase-medical liked"></i>
             )
           ) : mode === 'post' ? (
             <i className="fa-light fa-heart"></i>
           ) : (
-            <i class="fa-light fa-suitcase-medical"></i>
+            <i className="fa-light fa-suitcase-medical"></i>
           )}
           <p>{mode === 'post' ? 'Like' : 'Pray'}</p>
         </div>

@@ -46,6 +46,7 @@ function ProductList({ productList, getProductList, handleSort, currentSort }) {
             style={{
               textAlign: 'center',
             }}
+            className="box"
           >
             Do you want to sell something ? Let's add new product !{' '}
             {currentUser.username}

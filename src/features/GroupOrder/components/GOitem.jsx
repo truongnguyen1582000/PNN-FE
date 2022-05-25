@@ -51,7 +51,7 @@ function GOitem({ item, cartId }) {
         <p className="name">{item.cartOwner.username} (Owner)</p>
         <p
           style={{
-            marginLeft: '300px',
+            marginLeft: '100px',
           }}
         >
           Cart name:{' '}
@@ -61,6 +61,26 @@ function GOitem({ item, cartId }) {
             }}
           >
             {item.name}
+          </span>
+        </p>
+        <p
+          style={{
+            marginLeft: '200px',
+          }}
+        >
+          Limit money:{' '}
+          <span
+            style={{
+              fontWeight: 'bold',
+            }}
+          >
+            {/* vnd currency */}
+            {item.limitMoney
+              .toLocaleString('it-IT', {
+                style: 'currency',
+                currency: 'VND',
+              })
+              .replace('VND', '₫')}
           </span>
         </p>
         {isCartOwner && (

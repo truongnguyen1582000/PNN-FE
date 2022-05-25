@@ -193,10 +193,7 @@ function Account({ mode = 1 }) {
                   </>
                 )}
               </p>
-              <span className="quote">
-                Dogs and angels are not very far apart. - Charles Bukowski,
-                German American Writer
-              </span>
+              <span className="quote">{currentUser.quote}</span>
             </div>
 
             {mode === 1 && (

@@ -1,6 +1,7 @@
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useRef, useState } from 'react';
 import { orderApi } from '../../../api/order';
+import moment from 'moment';
 
 function OrderForShop(props) {
   const [orderList, setOrderList] = useState([]);
@@ -105,6 +106,17 @@ function OrderForShop(props) {
                   </span>
                 </div>
               </div>
+              {/* date order */}
+              <span>
+                <span
+                  style={{
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Order date:
+                </span>{' '}
+                {moment(item.createdAt).format('DD/MM/YYYY')}
+              </span>
               <div className="checkout-title">
                 <span>Product</span>
                 <span>Price</span>

@@ -8,7 +8,6 @@ import { postApi } from '../../api/post';
 function Newfeed(props) {
   const [postList, setPostList] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
-  const interval = useRef();
 
   const getPostList = async () => {
     try {
@@ -22,14 +21,6 @@ function Newfeed(props) {
   useEffect(
     () => {
       getPostList();
-
-      interval.current = setInterval(() => {
-        getPostList();
-      }, 2000);
-
-      return () => {
-        clearInterval(interval.current);
-      };
     },
     // eslint-disable-next-line
     []

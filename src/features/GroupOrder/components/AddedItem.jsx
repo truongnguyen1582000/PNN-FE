@@ -1,3 +1,4 @@
+import { useSnackbar } from 'notistack';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { groupOrderAPI } from '../../../api/groupOrder';
@@ -7,9 +8,16 @@ import ConfirmDelete from './ConfirmDelete';
 function AddedItem({ product, cartId, isItemOwner }) {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleIncreaseGOCartItem = async () => {
-    await groupOrderAPI.addMoreItemToGO(cartId, product.product._id);
+    try {
+      await groupOrderAPI.addMoreItemToGO(cartId, product.product._id);
+    } catch (error) {
+      enqueueSnackbar(error, {
+        variant: 'error',
+      });
+    }
     await dispatch(getGroupOrderCart());
   };
 

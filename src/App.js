@@ -7,7 +7,8 @@ import InvitePage from './features/InvitePage';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App grid-bg ba-grid anim">
+      <div className="inner"></div>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/auth/*" element={<Auth />} />

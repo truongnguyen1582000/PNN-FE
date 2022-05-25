@@ -32,6 +32,9 @@ function HomeNavbar(props) {
             type="text"
             name="search"
             placeholder="Search on PET PLAYGROUND NETWORK"
+            onChange={(e) => {
+              console.log(e.target.value);
+            }}
           />
         </div>
         <div className="navbar-end">

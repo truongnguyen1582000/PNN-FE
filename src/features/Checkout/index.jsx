@@ -26,7 +26,9 @@ function Checkout(props) {
     setAddressList(data);
   };
 
-  const handleCheckoutMyCart = () => {};
+  const handleCheckoutMyCart = () => {
+    navigate('/home-page/my-order');
+  };
 
   const handleCheckoutGO = async (message) => {
     const result = checkoutGOcart.info

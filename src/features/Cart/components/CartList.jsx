@@ -5,7 +5,7 @@ import CartItem from './CartItem';
 function CartList({ cartList = [] }) {
   const isShow = cartList?.list?.length === 0 || cartList.length === 0;
   return (
-    <div className="cart-list">
+    <div className="cart-list box">
       {isShow && (
         <div className="cart-empty">
           <Link to="/home-page/shoping">
